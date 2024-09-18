@@ -1,0 +1,42 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nx-suite/analog-app/profile/domain": [
+        "libs/analog-app/profile/domain/src/index.ts"
+      ],
+      "@nx-suite/analog-app/profile/feature-profile-list": [
+        "libs/analog-app/profile/feature-profile-list/src/index.ts"
+      ],
+      "@nx-suite/eshop-admin/categories/domain": [
+        "libs/eshop-admin/categories/domain/src/index.ts"
+      ],
+      "@nx-suite/eshop-admin/categories/feature-category-list": [
+        "libs/eshop-admin/categories/feature-category-list/src/index.ts"
+      ],
+      "@nx-suite/eshop-admin/products/domain": [
+        "libs/eshop-admin/products/domain/src/index.ts"
+      ],
+      "@nx-suite/eshop-admin/products/feature-product-list": [
+        "libs/eshop-admin/products/feature-product-list/src/index.ts"
+      ],
+      "@nx-suite/eshop-admin/shell": ["libs/eshop-admin/shell/src/index.ts"],
+      "@nx-suite/shared/ui": ["libs/shared/ui/src/index.ts"],
+      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

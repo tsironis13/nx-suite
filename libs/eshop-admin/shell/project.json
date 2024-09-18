@@ -1,0 +1,46 @@
+{
+  "name": "shell",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/eshop-admin/shell/src",
+  "prefix": "eshop-admin",
+  "projectType": "library",
+  "tags": [
+    "scope:eshop-admin"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "options": {
+        "project": "libs/eshop-admin/shell/ng-package.json",
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/eshop-admin/shell/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/eshop-admin/shell/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/eshop-admin/shell/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

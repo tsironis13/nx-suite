@@ -1,0 +1,20 @@
+{
+  "name": "analog-app-profile-domain",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/analog-app/profile/domain/src",
+  "prefix": "profile",
+  "projectType": "library",
+  "tags": ["scope:analog-app", "type:domain-logic"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/analog-app/profile/domain/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

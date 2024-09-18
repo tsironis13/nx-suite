@@ -1,0 +1,63 @@
+{
+  "name": "eshop-admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@analogjs/platform:vite",
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
+      },
+      "outputs": [
+        "{options.outputPath}",
+        "{workspaceRoot}/dist/apps/eshop-admin/.nitro",
+        "{workspaceRoot}/dist/apps/eshop-admin/ssr",
+        "{workspaceRoot}/dist/apps/eshop-admin/analog"
+      ],
+      "options": {
+        "main": "apps/eshop-admin/src/main.ts",
+        "configFile": "apps/eshop-admin/vite.config.ts",
+        "outputPath": "dist/apps/eshop-admin/client",
+        "tsConfig": "apps/eshop-admin/tsconfig.app.json",
+        "styles": [],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
+          }
+        ]
+      }
+    },
+    "serve": {
+      "executor": "@analogjs/platform:vite-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "eshop-admin:build",
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "eshop-admin:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "eshop-admin:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@analogjs/vitest-angular:test",
+      "outputs": ["{projectRoot}/coverage"]
+    }
+  },
+  "tags": ["scope:eshop-admin"],
+  "sourceRoot": "apps/eshop-admin/src"
+}

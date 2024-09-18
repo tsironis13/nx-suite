@@ -1,0 +1,92 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:eshop-admin",
+                "onlyDependOnLibsWithTags": [
+                  "scope:eshop-admin",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:analog-app",
+                "onlyDependOnLibsWithTags": ["scope:analog-app", "scope:shared"]
+              },
+              {
+                "sourceTag": "domain:eshop-admin:products",
+                "onlyDependOnLibsWithTags": ["domain:eshop-admin:products"]
+              },
+              {
+                "sourceTag": "domain:eshop-admin:categories",
+                "onlyDependOnLibsWithTags": ["domain:eshop-admin:categories"]
+              },
+              {
+                "sourceTag": "type:api",
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:domain-logic",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:domain-logic",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util"]
+              },
+              {
+                "sourceTag": "type:domain-logic",
+                "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              {
+                "sourceTag": "domain:categories",
+                "onlyDependOnLibsWithTags": [
+                  "domain:categories",
+                  "domain:shared"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    }
+  ]
+}
