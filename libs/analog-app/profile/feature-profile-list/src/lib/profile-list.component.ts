@@ -10,9 +10,9 @@ import { ProfileListFacade } from '@nx-suite/analog-app/profile/domain';
   styleUrls: ['./profile-list.component.scss'],
 })
 export class ProfileListComponent implements OnInit {
-  private profileListFacade = inject(ProfileListFacade);
+  readonly #profileListFacade = inject(ProfileListFacade);
 
   ngOnInit() {
-    console.log(this.profileListFacade.get());
+    console.log(this.#profileListFacade.get());
   }
 }

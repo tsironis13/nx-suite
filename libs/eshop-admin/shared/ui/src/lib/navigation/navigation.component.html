@@ -1,0 +1,19 @@
+<nav tuiNavigationNav [style.position]="'sticky'">
+  <a routerLink=".">
+    <tui-icon icon="@tui.chevron-left" />
+    Back
+  </a>
+  /
+  <span tuiNavigationLogo>
+    <span tuiFade>Groups</span>
+    <tui-badge iconStart="@tui.lock">Status</tui-badge>
+  </span>
+  <hr />
+  <tui-tabs tuiFade>
+    <button tuiTab type="button">Default view</button>
+    <button tuiTab type="button">Details</button>
+    <button tuiTab type="button">Followers</button>
+  </tui-tabs>
+  <button appearance="secondary" tuiButton type="button">Secondary</button>
+  <button tuiButton type="button">Primary</button>
+</nav>

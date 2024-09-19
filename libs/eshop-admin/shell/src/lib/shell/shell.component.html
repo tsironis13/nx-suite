@@ -1,12 +1,11 @@
-<div>sidebar from LIB SHELL</div>
-<div>header</div>
-<button [routerLink]="['/products']">go to products</button>
-<button [routerLink]="['/categories']">go to categories</button>
-<button [routerLink]="['/']">go to dashboard</button>
+<eshop-admin-header class="fixed w-full z-10"></eshop-admin-header>
 
-<tui-badge appearance="success" tuiStatus> Success shell </tui-badge>
-<tui-badge appearance="warning">Warning</tui-badge>
-<tui-badge appearance="neutral">Neutral</tui-badge>
-<tui-badge appearance="info">Info</tui-badge>
-
-<router-outlet></router-outlet>
+<div class="flex h-full pt-12">
+  <eshop-admin-sidebar class=""></eshop-admin-sidebar>
+  <div class="flex w-full flex-col z-0">
+    <eshop-admin-navigation></eshop-admin-navigation>
+    <tui-scrollbar class="w-full">
+      <router-outlet></router-outlet>
+    </tui-scrollbar>
+  </div>
+</div>

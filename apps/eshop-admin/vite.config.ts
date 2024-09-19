@@ -1,8 +1,9 @@
 /// <reference types="vitest" />
 
 import analog from '@analogjs/platform';
-import { defineConfig, Plugin, splitVendorChunkPlugin } from 'vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -26,6 +27,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       analog({
+        ssr: true,
         nitro: {
           routeRules: {
             '/': {
@@ -34,7 +36,14 @@ export default defineConfig(({ mode }) => {
           },
         },
       }),
-
+      viteStaticCopy({
+        targets: [
+          {
+            src: '../../node_modules/@taiga-ui/icons/src/**',
+            dest: '/assets/taiga-ui/icons',
+          },
+        ],
+      }),
       nxViteTsPaths(),
       splitVendorChunkPlugin(),
     ],

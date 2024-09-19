@@ -10,9 +10,9 @@ import { CategoriesFacade } from '@nx-suite/eshop-admin/categories/domain';
   styleUrls: ['./category-list.component.scss'],
 })
 export class CategoryListComponent implements OnInit {
-  private categoriesListFacade = inject(CategoriesFacade);
+  readonly #categoriesListFacade = inject(CategoriesFacade);
 
   ngOnInit() {
-    console.log(this.categoriesListFacade.get());
+    console.log(this.#categoriesListFacade.get());
   }
 }

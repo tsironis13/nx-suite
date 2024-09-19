@@ -1,5 +1,5 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
@@ -11,11 +11,12 @@ import { map } from 'rxjs';
 
     ID: {{ productId$ | async }}
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ProductPageComponent {
-  private readonly route = inject(ActivatedRoute);
+  readonly #route = inject(ActivatedRoute);
 
-  readonly productId$ = this.route.paramMap.pipe(
+  readonly productId$ = this.#route.paramMap.pipe(
     map((params) => params.get('productId'))
   );
 }

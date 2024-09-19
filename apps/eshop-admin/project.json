@@ -31,7 +31,7 @@
           {
             "glob": "**/*",
             "input": "@taiga-ui/icons/src",
-            "output": "assets/taiga-ui/icons"
+            "output": "assets/taiga-ui/icons/"
           }
         ]
       }

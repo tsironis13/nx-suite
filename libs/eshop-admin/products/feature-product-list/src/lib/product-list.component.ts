@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ProductsFacade } from '@nx-suite/eshop-admin/products/domain';
 
 @Component({
@@ -8,12 +13,13 @@ import { ProductsFacade } from '@nx-suite/eshop-admin/products/domain';
   selector: 'eshop-admin-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductListComponent implements OnInit {
-  private productListFacade = inject(ProductsFacade);
+export class EshopAdminProductListComponent implements OnInit {
+  readonly #productListFacade = inject(ProductsFacade);
 
   ngOnInit() {
-    console.log(this.productListFacade.get());
+    console.log(this.#productListFacade.get());
     console.log('on init');
   }
 }

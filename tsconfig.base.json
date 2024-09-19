@@ -35,7 +35,10 @@
       ],
       "@nx-suite/eshop-admin/shell": ["libs/eshop-admin/shell/src/index.ts"],
       "@nx-suite/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"]
+      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"],
+      "@nx-suite/eshop-admin/shared/ui": [
+        "libs/eshop-admin/shared/ui/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
