@@ -6,8 +6,8 @@
   "projectType": "library",
   "tags": [
     "scope:eshop-admin",
-    "domain:eshop-admin:categories",
-    "type:domain-logic"
+    "type:domain-logic",
+    "domain:eshop-admin:categories"
   ],
   "targets": {
     "test": {

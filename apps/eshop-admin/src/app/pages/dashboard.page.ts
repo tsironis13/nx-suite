@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TuiButton } from '@taiga-ui/core';
 
 @Component({
   standalone: true,
-  imports: [RouterOutlet],
-  template: `<div>dashboard page123 dashboard</div>
+  imports: [RouterOutlet, TuiButton],
+  template: `<div>dashboar d page123 dashboard</div>
+
     <div>dashboard page123 dashboard</div>
     <div>dashboard page123 dashboard</div>
     <div>dashboard page123 dashboard</div>

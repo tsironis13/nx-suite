@@ -1,0 +1,21 @@
+<div>
+  <tui-select
+    [formControlName]="this.fControl().key"
+    [valueContent]="stringify(data())"
+    (tuiValueChanges)="onChanges($event)"
+  >
+    <ng-template tuiDataList>
+      <tui-data-list>
+        @for (item of data(); track $index) {
+        <button tuiOption type="button" [value]="item.id">
+          {{ item[dataLabelKey()] }}
+        </button>
+        }
+      </tui-data-list>
+    </ng-template>
+  </tui-select>
+  <tui-error
+    [formControlName]="this.fControl().key"
+    [error]="[] | tuiFieldError | async"
+  />
+</div>

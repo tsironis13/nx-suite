@@ -1,11 +1,49 @@
 <eshop-admin-header class="fixed w-full z-10"></eshop-admin-header>
 
 <div class="flex h-full pt-12">
-  <eshop-admin-sidebar class=""></eshop-admin-sidebar>
+  <eshop-admin-aside
+    [headerTemplate]="headerTemplate()"
+    [footerTemplate]="footerTemplate()"
+  >
+  </eshop-admin-aside>
+
   <div class="flex w-full flex-col z-0">
     <eshop-admin-navigation></eshop-admin-navigation>
-    <tui-scrollbar class="w-full">
+
+    <tui-scrollbar tuiNavigationMain class="w-full h-full main-content-wrapper">
       <router-outlet></router-outlet>
     </tui-scrollbar>
   </div>
 </div>
+
+<ng-template eshopAdminSidebarHeader>
+  <button
+    iconStart="@tui.layers"
+    [routerLink]="'/categories'"
+    tuiAsideItem
+    type="button"
+  >
+    Categories
+  </button>
+  <button
+    iconStart="@tui.shopping-cart"
+    [routerLink]="'/products'"
+    tuiAsideItem
+    type="button"
+  >
+    Products
+  </button>
+</ng-template>
+
+<ng-template eshopAdminSidebarFooter eshopAdminSidebarContext let-context>
+  <footer>
+    <button
+      tuiAsideItem
+      type="button"
+      [iconStart]="
+        context.expanded() ? '@tui.chevron-left' : '@tui.chevron-right'
+      "
+      (click)="context.expanded.set(!context.expanded())"
+    ></button>
+  </footer>
+</ng-template>

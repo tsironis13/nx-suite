@@ -2,6 +2,7 @@
 
 import analog from '@analogjs/platform';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
@@ -12,7 +13,12 @@ export default defineConfig(({ mode }) => {
     cacheDir: `../../node_modules/.vite`,
 
     ssr: {
-      noExternal: ['@analogjs/trpc', '@trpc/server'],
+      noExternal: [
+        '@analogjs/trpc',
+        '@trpc/server',
+        '@ng-web-apis/**',
+        '@taiga-ui/**',
+      ],
     },
 
     build: {
@@ -29,6 +35,14 @@ export default defineConfig(({ mode }) => {
       analog({
         ssr: true,
         nitro: {
+          rollupConfig: {
+            plugins: [
+              typescriptPaths({
+                tsConfigPath: 'tsconfig.base.json',
+                preserveExtensions: true,
+              }),
+            ],
+          },
           routeRules: {
             '/': {
               prerender: false,

@@ -1,0 +1,19 @@
+{
+  "name": "shared-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/domain/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/shared/domain/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["type:domain-logic", "scope:shared"]
+}

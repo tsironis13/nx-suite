@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "../../libs/eshop-admin/shared/util/src/lib/trpc/trpc-client.ts"
+  ],
   "compilerOptions": {
     "types": ["node", "vitest/globals"]
   }

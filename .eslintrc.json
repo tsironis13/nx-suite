@@ -29,11 +29,17 @@
               },
               {
                 "sourceTag": "domain:eshop-admin:products",
-                "onlyDependOnLibsWithTags": ["domain:eshop-admin:products"]
+                "onlyDependOnLibsWithTags": [
+                  "domain:eshop-admin:products",
+                  "scope:shared"
+                ]
               },
               {
                 "sourceTag": "domain:eshop-admin:categories",
-                "onlyDependOnLibsWithTags": ["domain:eshop-admin:categories"]
+                "onlyDependOnLibsWithTags": [
+                  "domain:eshop-admin:categories",
+                  "scope:shared"
+                ]
               },
               {
                 "sourceTag": "type:api",
@@ -57,14 +63,7 @@
               },
               {
                 "sourceTag": "type:domain-logic",
-                "onlyDependOnLibsWithTags": ["type:util"]
-              },
-              {
-                "sourceTag": "domain:categories",
-                "onlyDependOnLibsWithTags": [
-                  "domain:categories",
-                  "domain:shared"
-                ]
+                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util"]
               }
             ]
           }

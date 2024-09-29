@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ButtonAppearance, ButtonSizes } from '@nx-suite/shared/util';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
-import { ButtonAppearance, ButtonSizes } from './types';
 
 @Component({
   selector: 'nx-suite-ui-button',
@@ -10,7 +10,7 @@ import { ButtonAppearance, ButtonSizes } from './types';
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent {
+export class NxSuiteUiButtonComponent {
   public readonly size = input<ButtonSizes>('xs');
   public readonly appearance = input<ButtonAppearance>('accent');
 }

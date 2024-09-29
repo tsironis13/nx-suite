@@ -1,1 +1,3 @@
-export * from './lib/application/products.facade';
+export * from './lib/application';
+export * from './lib/entities';
+export * from './lib/infrastructure';

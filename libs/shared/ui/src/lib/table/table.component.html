@@ -1,0 +1,48 @@
+<!-- <div> -->
+
+<table tuiTable [columns]="mappedColumns()" [size]="size()" class="w-full">
+  <thead>
+    <tr tuiThGroup>
+      @for (item of columns(); track $index) {
+      <th *tuiHead="item.field" tuiTh>{{ item.header }}</th>
+      }
+    </tr>
+    <!-- <tr>
+      <ng-container *ngTemplateOutlet="headerTemplate().templateRef">
+      </ng-container>
+    </tr> -->
+  </thead>
+  <tbody *tuiLet="data() as sortedData" tuiTbody [data]="sortedData">
+    @for (item of sortedData; track $index) {
+    <tr tuiTr>
+      @for (column of columns(); track $index;) { @let cField = column.field |
+      toString;
+      <td *tuiCell="cField" tuiTd>
+        {{ item[column.field] }}
+      </td>
+      @if (column.metaData?.type === 'template') {
+      <td *tuiCell="'t'" tuiTd>
+        <ng-container [ngTemplateOutlet]="contextMenu()"> </ng-container>
+      </td>
+      } }
+
+      <!-- @if (contextMenu()) {
+      <td *tuiCell="'t'" tuiTd>
+        <ng-container [ngTemplateOutlet]="contextMenu()"> </ng-container>
+      </td>
+      } -->
+    </tr>
+
+    }
+    <!-- <ng-container *ngTemplateOutlet="bodyTemplate().templateRef">
+    </ng-container> -->
+  </tbody>
+</table>
+
+<tui-table-pagination
+  [page]="page"
+  [size]="size1"
+  [total]="237"
+  (paginationChange)="onPagination($event)"
+/>
+<!-- </div> -->
