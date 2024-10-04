@@ -1,130 +1,29 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CategoryStore } from '@nx-suite/eshop-admin/categories/domain';
+import { HeaderNavigationStore } from '@nx-suite/eshop-admin/shared/domain';
 import {
-  NxSuiteUiSelectComponent,
+  NxSuiteUiButtonComponent,
   NxSuiteUiTableComponent,
 } from '@nx-suite/shared/ui';
-import { TuiTable, TuiTablePaginationEvent } from '@taiga-ui/addon-table';
-import {
-  TuiAutoColorPipe,
-  TuiDropdown,
-  TuiIcon,
-  TuiInitialsPipe,
-} from '@taiga-ui/core';
-import {
-  TuiAvatar,
-  TuiBadge,
-  TuiCheckbox,
-  TuiChip,
-  TuiItemsWithMore,
-  TuiProgressBar,
-  TuiStatus,
-} from '@taiga-ui/kit';
-import { TuiCell } from '@taiga-ui/layout';
-
-type Card = {
-  id: number;
-  cardName: string;
-};
+import { TuiTablePaginationEvent } from '@taiga-ui/addon-table';
 
 @Component({
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TuiCell,
-    TuiTable,
-    TuiCheckbox,
-    TuiProgressBar,
-    TuiBadge,
-    TuiStatus,
-    TuiItemsWithMore,
-    TuiChip,
-    TuiIcon,
-    TuiAvatar,
-    TuiDropdown,
-    TuiAutoColorPipe,
-    TuiInitialsPipe,
     NxSuiteUiTableComponent,
-    NxSuiteUiSelectComponent,
+    NxSuiteUiButtonComponent,
+    RouterLink,
   ],
   selector: 'eshop-admin-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
-  host: { ngSkipHydration: 'true' },
 })
-export class EshopAdminCategoryListComponent {
-  // protected readonly headerTemplate = viewChild.required<
-  //   TableHeaderDirective<unknown>
-  // >(TableHeaderDirective<unknown>);
-  // protected readonly bodyTemplate = viewChild.required<
-  //   TableBodyDirective<unknown>
-  // >(TableBodyDirective<unknown>);
-
+export class EshopAdminCategoryListComponent implements OnInit {
   protected readonly categoryStore = inject(CategoryStore);
-  protected readonly validators = Validators.required;
-  fb = inject(FormBuilder);
-
-  form = this.fb.group({});
-
-  protected cards: Card[] = [
-    {
-      id: 1,
-      cardName: 'Bitcoin',
-    },
-    {
-      id: 2,
-      cardName: 'Bitcoin2',
-    },
-    {
-      id: 3,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 4,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 5,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 6,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 7,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 8,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 9,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 10,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 11,
-      cardName: 'Bitcoin3',
-    },
-    {
-      id: 12,
-      cardName: 'Bitcoin3',
-    },
-  ];
+  readonly #headerNavigationStore = inject(HeaderNavigationStore);
 
   protected page = 3;
   protected size1 = 10;
@@ -143,10 +42,30 @@ export class EshopAdminCategoryListComponent {
     console.info('New page:', index);
   }
 
+  // x = new FormGroup({
+  //   //id: new FormControl(1),
+  //   name: new FormControl(''),
+  // });
+  x = this.categoryStore.formGroup();
+
   constructor() {
-    //effect(() => console.log(this.listStore.testFiltering()));
-    //this.categoryStore.
-    this.form.valueChanges.subscribe((x) => console.log(x));
+    this.categoryStore.syncForm(this.x.valueChanges);
+  }
+
+  ngOnInit(): void {
+    this.setTitle();
+  }
+
+  updateForm() {
+    //this.categoryStore.create();
+    this.x.patchValue({
+      //a1: 'a1',
+      name: 'df1',
+    });
+  }
+
+  create() {
+    this.categoryStore.create();
   }
 
   protected readonly data = [
@@ -238,5 +157,9 @@ export class EshopAdminCategoryListComponent {
 
   updateFilter() {
     this.categoryStore.updateFilter({ name: 'a' });
+  }
+
+  private setTitle() {
+    this.#headerNavigationStore.setTitle('Categories List');
   }
 }

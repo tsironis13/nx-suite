@@ -1,4 +1,4 @@
-export type ButtonSizes = 'xs' | 's' | 'm' | 'l';
+export type ButtonSize = 'xs' | 's' | 'm' | 'l';
 
 export type ButtonAppearance =
   | 'primary'

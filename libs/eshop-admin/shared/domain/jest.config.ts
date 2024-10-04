@@ -1,10 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'eshop-admin-categories-feature-category-list',
+  displayName: 'domain',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory:
-    '../../../../coverage/libs/eshop-admin/categories/feature-category-list',
+  coverageDirectory: '../../../../coverage/libs/eshop-admin/shared/domain',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

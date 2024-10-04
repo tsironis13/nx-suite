@@ -1,19 +1,35 @@
 <!-- <div> -->
 
-<table tuiTable [columns]="mappedColumns()" [size]="size()" class="w-full">
+<!-- <tr tuiThGroup>
+      @for (item of columns1; track $index) {
+      <th *tuiHead="item" tuiSortable fs tuiTh>{{ item }}</th>
+      }
+    </tr> -->
+
+<table
+  tuiTable
+  [columns]="columns1"
+  [tuiSortBy]="sorter$ | async"
+  class="w-full"
+>
   <thead>
     <tr tuiThGroup>
-      @for (item of columns(); track $index) {
-      <th *tuiHead="item.field" tuiTh>{{ item.header }}</th>
+      @for (item of columns1; track $index) {
+      <th *tuiHead="item" tuiSortable tuiTh>{{ item }}</th>
       }
     </tr>
-    <!-- <tr>
-      <ng-container *ngTemplateOutlet="headerTemplate().templateRef">
-      </ng-container>
-    </tr> -->
   </thead>
-  <tbody *tuiLet="data() as sortedData" tuiTbody [data]="sortedData">
-    @for (item of sortedData; track $index) {
+  <tbody tuiTbody>
+    <tr tuiTr>
+      <td tuiTd>1</td>
+      <td tuiTd>1</td>
+      <td tuiTd>1</td>
+      <td tuiTd>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- @for (item of sortedData; track $index) {
     <tr tuiTr>
       @for (column of columns(); track $index;) { @let cField = column.field |
       toString;
@@ -25,24 +41,13 @@
         <ng-container [ngTemplateOutlet]="contextMenu()"> </ng-container>
       </td>
       } }
-
-      <!-- @if (contextMenu()) {
-      <td *tuiCell="'t'" tuiTd>
-        <ng-container [ngTemplateOutlet]="contextMenu()"> </ng-container>
-      </td>
-      } -->
     </tr>
 
-    }
-    <!-- <ng-container *ngTemplateOutlet="bodyTemplate().templateRef">
-    </ng-container> -->
-  </tbody>
-</table>
-
-<tui-table-pagination
+    } -->
+<!-- <tui-table-pagination
   [page]="page"
   [size]="size1"
   [total]="237"
   (paginationChange)="onPagination($event)"
-/>
+/> -->
 <!-- </div> -->

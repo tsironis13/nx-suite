@@ -2,7 +2,7 @@ import { aliasedTable, asc, eq, SQL } from 'drizzle-orm';
 import { PgColumn, PgSelect } from 'drizzle-orm/pg-core';
 import { optional, z } from 'zod';
 import { db } from '../../drizzle/db';
-import { productCategories } from '../../drizzle/schema';
+import { ProductCategories, productCategories } from '../../drizzle/schema';
 import { publicProcedure, router } from '../trpc';
 
 function withPagination<T extends PgSelect>(
@@ -70,9 +70,35 @@ export const productCategoryRouter = router({
 
       //return await db.select().from(productCategories).limit(input);
     }),
-  list: publicProcedure.query(async () => {
-    return await db.select().from(productCategories).limit(2);
+  list: publicProcedure.input(z.array(z.string())).query(async ({ input }) => {
+    const obj: Record<
+      string,
+      (typeof productCategories)[keyof ProductCategories]
+    > = {};
+
+    input.forEach((key) => {
+      obj[key] = productCategories[key as keyof ProductCategories];
+    });
+
+    return await db
+      .select({
+        id: productCategories.id,
+        parentCategoryId: productCategories.parentCategoryId,
+        name: productCategories.name,
+      })
+      .from(productCategories);
   }),
+  create: publicProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        description: z.nullable(z.string()),
+        parentCategoryId: z.nullable(z.number()),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await db.insert(productCategories).values(input).returning();
+    }),
   remove: publicProcedure
     .input(
       z.object({

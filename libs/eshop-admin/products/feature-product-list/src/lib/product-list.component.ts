@@ -23,6 +23,6 @@ export class EshopAdminProductListComponent {
   }
 
   updateFilter() {
-    this.listStore.updateFilter({ name: 'a' });
+    this.listStore.updateFilter({ pageNumber: 10, pageSize: 10 });
   }
 }

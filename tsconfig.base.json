@@ -21,12 +21,12 @@
       "@nx-suite/analog-app/profile/feature-profile-list": [
         "libs/analog-app/profile/feature-profile-list/src/index.ts"
       ],
-      "@nx-suite/shared/domain": ["libs/shared/domain/src/index.ts"],
+      "@nx-suite/domain": ["libs/eshop-admin/shared/domain/src/index.ts"],
       "@nx-suite/eshop-admin/categories/domain": [
         "libs/eshop-admin/categories/domain/src/index.ts"
       ],
-      "@nx-suite/eshop-admin/categories/feature-category-list": [
-        "libs/eshop-admin/categories/feature-category-list/src/index.ts"
+      "@nx-suite/eshop-admin/categories/feature": [
+        "libs/eshop-admin/categories/feature/src/index.ts"
       ],
       "@nx-suite/eshop-admin/products/domain": [
         "libs/eshop-admin/products/domain/src/index.ts"
@@ -44,6 +44,7 @@
         "libs/eshop-admin/shared/util/src/index.ts"
       ],
       "@nx-suite/eshop-admin/shell": ["libs/eshop-admin/shell/src/index.ts"],
+      "@nx-suite/shared/domain": ["libs/shared/domain/src/index.ts"],
       "@nx-suite/shared/domain/trpc-client": [
         "libs/shared/domain/trpc-client/src/index.ts"
       ],

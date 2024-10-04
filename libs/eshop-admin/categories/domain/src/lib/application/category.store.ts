@@ -1,18 +1,48 @@
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
-import { signalStore, withHooks } from '@ngrx/signals';
+import { FormGroup } from '@angular/forms';
+import { signalStore, withHooks, withMethods } from '@ngrx/signals';
 import { withEntities } from '@ngrx/signals/entities';
-import { withDataService } from '@nx-suite/shared/util';
-import { Category } from '../entities';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import {
+  withDataService,
+  withEntitiesAllService,
+  withFormStateService,
+} from '@nx-suite/shared/util';
+import { filter, pipe, tap } from 'rxjs';
+import { Category, CategoryForm } from '../entities';
 import { CategoryService } from '../infrastructure';
+
+export const withCategoriesAllService = withEntitiesAllService<
+  Category,
+  CategoryService,
+  'categoriesAll'
+>(CategoryService, 'categoriesAll');
 
 export const CategoryStore = signalStore(
   { providedIn: 'root' },
   withDevtools('categories'),
+  withCategoriesAllService,
   withEntities<Category>(),
+  withFormStateService<CategoryForm>(new FormGroup({})),
   withDataService(CategoryService, { name: '' }),
+  withMethods((store) => {
+    return {
+      onCategoryCreated: rxMethod<boolean>(
+        pipe(
+          filter((x) => x),
+          tap(() => {
+            const lastInsertedCategory =
+              store.entities()[store.entities().length - 1];
+
+            store.allAddEntityIfNotExists(lastInsertedCategory);
+          })
+        )
+      ),
+    };
+  }),
   withHooks({
     onInit(store) {
-      store.load(store.entityFilterParams);
+      store.getByFilterAndPagination(store.entityFilterParams);
     },
   })
 );

@@ -6,20 +6,26 @@ import { Product } from '../entities';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService implements DataService<Product, Pagination> {
+export class ProductService
+  implements DataService<Product, Pagination, { id: 1 }>
+{
   readonly #trpc = injectTrpcClient();
 
   // public productCategories$ = this._trpc.productCategories.list.query();
 
-  load(pagination: Pagination): Promise<Product[]> {
+  getByFilterAndPagination(params: any): any {
     // console.log(pagination);
 
     const x = this.#trpc.product.getPaginated
-      .query({ pageSize: pagination.pageSize })
+      .query({ pageSize: params.pagination.pageSize })
       .toPromise() as any;
     return x;
     //console.log(x);
     //x.subscribe((x1) => console.log(x1));
     return;
+  }
+
+  create(params: any) {
+    return null;
   }
 }

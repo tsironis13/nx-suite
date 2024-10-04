@@ -1,0 +1,7 @@
+<div *tuiLet="this.fControl().key | toString as key">
+  <tui-input [formControlName]="key">
+    <ng-content></ng-content>
+    <input placeholder="{{ this.fControl().placeHolder }}" tuiTextfieldLegacy />
+  </tui-input>
+  <tui-error [formControlName]="key" [error]="[] | tuiFieldError | async" />
+</div>

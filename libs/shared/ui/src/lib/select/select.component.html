@@ -1,21 +1,28 @@
-<div>
+<div *tuiLet="this.fControl().key | toString as key">
   <tui-select
-    [formControlName]="this.fControl().key"
+    [formControlName]="key"
     [valueContent]="stringify(data())"
-    (tuiValueChanges)="onChanges($event)"
+    [tuiTextfieldCleaner]="clearItem()"
   >
-    <ng-template tuiDataList>
+    <ng-content></ng-content>
+    <cdk-virtual-scroll-viewport
+      *tuiDataList
+      appendOnly
+      tuiScrollable
+      class="scroll"
+      [itemSize]="20"
+    >
       <tui-data-list>
-        @for (item of data(); track $index) {
-        <button tuiOption type="button" [value]="item.id">
+        <button
+          *cdkVirtualFor="let item of data()"
+          tuiOption
+          type="button"
+          [value]="item.id"
+        >
           {{ item[dataLabelKey()] }}
         </button>
-        }
       </tui-data-list>
-    </ng-template>
+    </cdk-virtual-scroll-viewport>
   </tui-select>
-  <tui-error
-    [formControlName]="this.fControl().key"
-    [error]="[] | tuiFieldError | async"
-  />
+  <tui-error [formControlName]="key" [error]="[] | tuiFieldError | async" />
 </div>

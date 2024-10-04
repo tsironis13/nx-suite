@@ -1,6 +1,18 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ButtonAppearance, ButtonSizes } from '@nx-suite/shared/util';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  InputSignal,
+  output,
+} from '@angular/core';
+import { ButtonAppearance, ButtonSize } from '@nx-suite/shared/util';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
+
+interface ButtonComponent {
+  size: InputSignal<ButtonSize>;
+  appearance: InputSignal<ButtonAppearance>;
+  disabled: InputSignal<boolean>;
+}
 
 @Component({
   selector: 'nx-suite-ui-button',
@@ -10,7 +22,10 @@ import { TuiButton, TuiIcon } from '@taiga-ui/core';
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NxSuiteUiButtonComponent {
-  public readonly size = input<ButtonSizes>('xs');
+export class NxSuiteUiButtonComponent implements ButtonComponent {
+  public readonly size = input<ButtonSize>('xs');
   public readonly appearance = input<ButtonAppearance>('accent');
+  public readonly disabled = input<boolean>(false);
+
+  public readonly onClick = output<void>();
 }

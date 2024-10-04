@@ -1,3 +1,10 @@
-<button [size]="size()" [appearance]="appearance()" tuiButton type="button">
+<button
+  [disabled]="disabled()"
+  [size]="size()"
+  [appearance]="appearance()"
+  tuiButton
+  type="button"
+  (click)="onClick.emit()"
+>
   <ng-content></ng-content>
 </button>

@@ -59,7 +59,11 @@
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util"]
+                "onlyDependOnLibsWithTags": [
+                  "type:domain-logic",
+                  "type:util",
+                  "type:ui"
+                ]
               },
               {
                 "sourceTag": "type:domain-logic",

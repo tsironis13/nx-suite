@@ -2,7 +2,43 @@
 <button (click)="updatePagination()">Update Pagination</button>
 <button (click)="updateFilter()">Update Filter</button>
 
-<nx-suite-ui-table
+<nx-suite-ui-button
+  [appearance]="'primary'"
+  [size]="'m'"
+  [routerLink]="'/categories/create'"
+  >Create</nx-suite-ui-button
+>
+
+<!-- <form [formGroup]="x"> -->
+<!-- <nx-suite-ui-select
+    [data]="cards"
+    [dataLabelKey]="'cardName'"
+    [fControl]="{ key: 'a', validators: null }"
+  ></nx-suite-ui-select>
+
+  <nx-suite-ui-input
+    [fControl]="{
+      key: 'name',
+      validators: null,
+      placeHolder: 'fdkjfd',
+      defaultValue: x.getRawValue()
+    }"
+    >test</nx-suite-ui-input
+  > -->
+
+<!-- <tui-input formControlName="name">
+    Type an text
+    <input tuiTextfieldLegacy type="text" />
+  </tui-input> -->
+<div style="margin: 10px">
+  ff
+
+  <button (click)="updateForm()">update form</button>
+  <button (click)="create()">create</button>
+</div>
+<!-- </form> -->
+
+<!-- <nx-suite-ui-table
   [size]="'l'"
   [columns]="[
     { field: 'id', header: 'id', metaData: { disableSort: true } },
@@ -25,15 +61,7 @@
     { id: 12, name: 'nam3e', description: 'descd' }
   ]"
   [contextMenu]="actions"
-/>
-
-<ng-container [formGroup]="form">
-  <nx-suite-ui-select
-    [data]="cards"
-    [dataLabelKey]="'cardName'"
-    [fControl]="{ key: 'a', validators: null }"
-  ></nx-suite-ui-select>
-</ng-container>
+/> -->
 
 <ng-template #actions>
   <div>edit</div>

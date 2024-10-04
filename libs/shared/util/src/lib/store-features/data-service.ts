@@ -8,26 +8,38 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { EntityId, setAllEntities } from '@ngrx/signals/entities';
+import { addEntities, EntityId, setAllEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { Observable, pipe, switchMap } from 'rxjs';
+import { delay, exhaustMap, Observable, pipe, switchMap } from 'rxjs';
 import { PAGINATION_DEFAULT_CONFIG } from '../tokens';
 import { provideSortingDefaultConfigToken } from '../tokens/sorting';
 import { Entity, EntityFilterData, Filter, Pagination } from '../types';
+import {
+  setLoaded,
+  setLoading,
+  withCallStateService,
+} from './call-state.service';
 
-export interface DataService<E extends Entity, F extends Filter> {
-  load(params: EntityFilterData<E, F>): Observable<E[]>;
+export interface DataService<
+  E extends Entity,
+  F extends Filter,
+  Z extends Record<string, unknown>
+> {
+  getByFilterAndPagination(params: EntityFilterData<E, F>): Observable<E[]>;
+  create(params: Z): Observable<Partial<E>[]>;
 }
 
 export function withDataService<
   E extends Entity,
   F extends Filter,
-  S extends DataService<E, F>
+  Z extends Record<string, unknown>,
+  S extends DataService<E, F, Z>
 >(dataServiceType: Type<S>, filters: F) {
   return signalStoreFeature(
     {
       state: type<{
         entityMap: Record<EntityId, E>;
+        form: Z;
         ids: EntityId[];
       }>(),
       signals: type<{
@@ -44,6 +56,8 @@ export function withDataService<
         filters,
       })
     ),
+    withCallStateService({ prop: 'entity' }),
+    withCallStateService({ prop: 'entityCreate' }),
     withComputed((store) => ({
       entityFilterParams: computed(() => {
         return {
@@ -62,13 +76,31 @@ export function withDataService<
         updateFilter(filter: F): void {
           return patchState(store, { filters: filter });
         },
-        load: rxMethod<EntityFilterData<E, F>>(
+        create: rxMethod<void>(
+          exhaustMap(() => {
+            patchState(store, setLoading('entityCreate'));
+            return dataService.create(store.form()).pipe(
+              delay(500),
+              tapResponse({
+                next: (entities) => {
+                  patchState(store, setLoaded('entityCreate'));
+                  patchState(store, addEntities(entities as E[]));
+                },
+                error: console.error,
+              })
+            );
+          })
+        ),
+        getByFilterAndPagination: rxMethod<EntityFilterData<E, F>>(
           pipe(
             switchMap((params) => {
-              return dataService.load(params).pipe(
+              patchState(store, setLoading('entity'));
+              return dataService.getByFilterAndPagination(params).pipe(
                 tapResponse({
-                  next: (entities) =>
-                    patchState(store, setAllEntities(entities)),
+                  next: (entities) => {
+                    patchState(store, setLoaded('entity'));
+                    patchState(store, setAllEntities(entities));
+                  },
                   error: console.error,
                 })
               );

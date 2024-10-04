@@ -1,9 +1,9 @@
 import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import {
+  bigserial,
   foreignKey,
   integer,
   pgTable,
-  serial,
   text,
   timestamp,
 } from 'drizzle-orm/pg-core';
@@ -11,7 +11,7 @@ import {
 export const productCategories = pgTable(
   'product_categories',
   {
-    id: serial('id').primaryKey(),
+    id: bigserial('id', { mode: 'number' }).primaryKey(),
     name: text('name'),
     description: text('description'),
     createdAt: timestamp('created_at').defaultNow().notNull(),

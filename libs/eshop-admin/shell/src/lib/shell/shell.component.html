@@ -8,7 +8,10 @@
   </eshop-admin-aside>
 
   <div class="flex w-full flex-col z-0">
-    <eshop-admin-navigation></eshop-admin-navigation>
+    <eshop-admin-navigation
+      [title]="headerNavigation.headerTitle()"
+      [navigationBreadcrumbLinks]="headerNavigation.captionLinks()"
+    ></eshop-admin-navigation>
 
     <tui-scrollbar tuiNavigationMain class="w-full h-full main-content-wrapper">
       <router-outlet></router-outlet>

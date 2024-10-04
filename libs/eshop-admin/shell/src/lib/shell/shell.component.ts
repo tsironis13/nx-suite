@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { HeaderNavigationStore } from '@nx-suite/eshop-admin/shared/domain';
 import {
   EshopAdminAsideComponent,
   EshopAdminHeaderComponent,
@@ -9,6 +15,7 @@ import {
   SidebarHeaderDirective,
   SidebarTemplateContext,
 } from '@nx-suite/eshop-admin/shared/ui';
+import { NxSuiteUiBreadcrumbComponent } from '@nx-suite/shared/ui';
 import { TuiScrollbar } from '@taiga-ui/core';
 import { TuiNavigation } from '@taiga-ui/layout';
 
@@ -26,7 +33,9 @@ import { TuiNavigation } from '@taiga-ui/layout';
     SidebarContextDirective,
     SidebarHeaderDirective,
     SidebarFooterDirective,
+    NxSuiteUiBreadcrumbComponent,
   ],
+  providers: [HeaderNavigationStore],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,4 +47,6 @@ export class ShellComponent {
   protected readonly footerTemplate = viewChild<
     SidebarFooterDirective<SidebarTemplateContext>
   >(SidebarFooterDirective<SidebarTemplateContext>);
+
+  protected readonly headerNavigation = inject(HeaderNavigationStore);
 }

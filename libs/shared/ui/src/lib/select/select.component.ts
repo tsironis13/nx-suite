@@ -1,4 +1,9 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import {
+  CdkFixedSizeVirtualScroll,
+  CdkVirtualForOf,
+  CdkVirtualScrollViewport,
+} from '@angular/cdk/scrolling';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,7 +12,6 @@ import {
   InputSignal,
   OnDestroy,
   OnInit,
-  output,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -17,23 +21,24 @@ import {
   ReactiveFormsModule,
   ValidationErrors,
 } from '@angular/forms';
-import { Entity } from '@nx-suite/shared/util';
-import { TuiContext, tuiPure, TuiValueChanges } from '@taiga-ui/cdk';
-import { TuiError } from '@taiga-ui/core';
+import { Entity, ToStringPipe } from '@nx-suite/shared/util';
+import { TuiContext, TuiLet, tuiPure, TuiValueChanges } from '@taiga-ui/cdk';
+import { TuiError, TuiScrollable, TuiScrollbar } from '@taiga-ui/core';
 import { TuiFieldErrorPipe } from '@taiga-ui/kit';
 import {
   TuiSelectModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/legacy';
 
-interface UiSelectComponent<T, K> {
+interface UiSelectComponent<T, K, Z> {
   data: InputSignal<T[]>;
   dataLabelKey: InputSignal<K>;
   fControl: InputSignal<{
-    key: string;
+    key: keyof Z;
     validators: ((control: AbstractControl) => ValidationErrors | null) | null;
-    defaultValue?: unknown;
+    defaultValue: { [K in keyof Z]: Z[K] };
   }>;
+  clearItem: InputSignal<boolean>;
 }
 
 @Component({
@@ -41,13 +46,19 @@ interface UiSelectComponent<T, K> {
   standalone: true,
   imports: [
     AsyncPipe,
-    NgFor,
     TuiSelectModule,
-    TuiTextfieldControllerModule,
     TuiError,
     TuiFieldErrorPipe,
     ReactiveFormsModule,
+    TuiScrollable,
+    TuiScrollbar,
     TuiValueChanges,
+    CdkFixedSizeVirtualScroll,
+    CdkVirtualForOf,
+    CdkVirtualScrollViewport,
+    TuiLet,
+    ToStringPipe,
+    TuiTextfieldControllerModule,
   ],
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
@@ -59,17 +70,17 @@ interface UiSelectComponent<T, K> {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NxSuiteUiSelectComponent<T extends Entity, K extends keyof T>
-  implements UiSelectComponent<T, K>, OnInit, OnDestroy
+export class NxSuiteUiSelectComponent<T extends Entity, K extends keyof T, Z>
+  implements UiSelectComponent<T, K, Z>, OnInit, OnDestroy
 {
-  readonly data = input.required<T[]>();
-  readonly dataLabelKey = input.required<K>();
-  readonly fControl = input.required<{
-    key: string;
+  public readonly data = input.required<T[]>();
+  public readonly dataLabelKey = input.required<K>();
+  public readonly fControl = input.required<{
+    key: keyof Z;
     validators: ((control: AbstractControl) => ValidationErrors | null) | null;
-    defaultValue?: unknown;
+    defaultValue: { [K in keyof Z]: Z[K] };
   }>();
-  onSelectionChange = output<number | string>();
+  public readonly clearItem = input<boolean>(false);
 
   readonly #parentFormContainer = inject(ControlContainer);
   readonly #fb = inject(FormBuilder);
@@ -91,21 +102,20 @@ export class NxSuiteUiSelectComponent<T extends Entity, K extends keyof T>
     this.removeControl();
   }
 
-  onChanges(value: number | string) {
-    this.onSelectionChange.emit(value);
-  }
-
   private addControl(): void {
     const control = this.fControl();
 
     this.getParentFormGroup().addControl(
-      control.key,
-      this.#fb.control(control.defaultValue || null, control.validators)
+      control.key as string,
+      this.#fb.control(
+        control.defaultValue[control.key] || null,
+        control.validators
+      )
     );
   }
 
   private removeControl(): void {
-    this.getParentFormGroup().removeControl(this.fControl().key);
+    this.getParentFormGroup().removeControl(this.fControl().key as string);
   }
 
   private getParentFormGroup() {
