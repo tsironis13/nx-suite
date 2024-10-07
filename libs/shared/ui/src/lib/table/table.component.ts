@@ -72,6 +72,20 @@ export class NxSuiteUiTableComponent<T> implements TableComponent<T> {
   protected readonly sorter$ = new BehaviorSubject<any>('name');
 
   protected columns1 = ['id', 'name', 'description', 't'];
+  protected columns123 = ['name', 'dob', 'age'];
+
+  data123 = [
+    {
+      name: 'dfkjfd',
+      dob: 'dfd',
+      age: 10,
+    },
+    {
+      name: '12dfkjfd',
+      dob: '12dfd',
+      age: 11,
+    },
+  ];
 
   protected readonly mappedColumns = computed(() =>
     this.columns().map((i) => i.field)

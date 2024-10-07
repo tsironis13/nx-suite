@@ -11,10 +11,13 @@ import {
 import { addEntities, EntityId, setAllEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { delay, exhaustMap, Observable, pipe, switchMap } from 'rxjs';
+import { AlertService } from '../services';
 import { PAGINATION_DEFAULT_CONFIG } from '../tokens';
 import { provideSortingDefaultConfigToken } from '../tokens/sorting';
 import { Entity, EntityFilterData, Filter, Pagination } from '../types';
 import {
+  NamedCallStateSlice,
+  setError,
   setLoaded,
   setLoading,
   withCallStateService,
@@ -69,6 +72,7 @@ export function withDataService<
     })),
     withMethods((store) => {
       const dataService = inject(dataServiceType);
+      const alertService = inject(AlertService);
       return {
         updatePagination(pagination: Pagination): void {
           return patchState(store, { pagination });
@@ -83,10 +87,30 @@ export function withDataService<
               delay(500),
               tapResponse({
                 next: (entities) => {
+                  alertService.showNotification(
+                    'Entity created successfully!',
+                    'Success!',
+                    'success'
+                  );
+
                   patchState(store, setLoaded('entityCreate'));
                   patchState(store, addEntities(entities as E[]));
                 },
-                error: console.error,
+                error: (error) => {
+                  alertService.showNotification(
+                    `An error occured while creating the entity! ${error}`,
+                    'An error occured!',
+                    'error'
+                  );
+
+                  patchState(
+                    store,
+                    setError(
+                      error as string,
+                      'entityCreate'
+                    ) as NamedCallStateSlice<'entityCreate'>
+                  );
+                },
               })
             );
           })
