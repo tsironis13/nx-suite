@@ -1,21 +1,9 @@
-import { aliasedTable, asc, eq, SQL } from 'drizzle-orm';
-import { PgColumn, PgSelect } from 'drizzle-orm/pg-core';
+import { aliasedTable, asc, count, desc, eq } from 'drizzle-orm';
 import { optional, z } from 'zod';
 import { db } from '../../drizzle/db';
 import { ProductCategories, productCategories } from '../../drizzle/schema';
 import { publicProcedure, router } from '../trpc';
-
-function withPagination<T extends PgSelect>(
-  qb: T,
-  orderByColumn: PgColumn | SQL | SQL.Aliased,
-  page = 1,
-  pageSize = 25
-) {
-  return qb
-    .orderBy(orderByColumn)
-    .limit(pageSize)
-    .offset((page - 1) * pageSize);
-}
+import { withPagination } from './utils/with-pagination';
 
 const parent = aliasedTable(productCategories, 'parent');
 
@@ -42,7 +30,7 @@ export const productCategoryRouter = router({
         }),
         sort: z.object({
           sortBy: z.string(),
-          sortOrder: z.string(),
+          sortOrder: z.number(),
         }),
         filters: optional(
           z.object({
@@ -61,12 +49,27 @@ export const productCategoryRouter = router({
         })
         .from(productCategories)
         .leftJoin(parent, eq(parent.id, productCategories.parentCategoryId));
-      return await withPagination(
+
+      const totalCount = await db
+        .select({ count: count() })
+        .from(productCategories);
+      console.log(input.sort);
+      const sortBy = input.sort.sortBy as keyof ProductCategories;
+      const sort =
+        input.sort.sortOrder === -1
+          ? asc(productCategories[sortBy])
+          : desc(productCategories[sortBy]);
+      const result = await withPagination(
         query.$dynamic(),
-        asc(productCategories.id),
+        sort,
         input.pagination.pageNumber,
         input.pagination.pageSize
       );
+
+      return {
+        items: [...result],
+        totalCount: totalCount[0].count,
+      };
 
       //return await db.select().from(productCategories).limit(input);
     }),
@@ -99,6 +102,13 @@ export const productCategoryRouter = router({
     .mutation(async ({ input }) => {
       return await db.insert(productCategories).values(input).returning();
     }),
+  getById: publicProcedure.input(z.number()).query(async ({ input }) => {
+    console.log(input);
+    return await db
+      .select()
+      .from(productCategories)
+      .where(eq(productCategories.id, input));
+  }),
   remove: publicProcedure
     .input(
       z.object({

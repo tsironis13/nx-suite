@@ -8,7 +8,7 @@ export type TableColumnType<T> = {
 
 export type TableColumnMetaData = {
   format?: string;
-  type?: 'date' | 'dateUtc' | 'number' | 'template';
+  type?: 'date' | 'dateUtc' | 'number' | 'template' | 'contextMenu';
   disableSort?: boolean;
   defaultSort?: 'asc' | 'desc';
 };

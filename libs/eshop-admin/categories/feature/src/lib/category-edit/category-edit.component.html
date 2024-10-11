@@ -3,14 +3,14 @@
   [overlay]="true"
 >
   <eshop-admin-category-create-edit-shared
-    [title]="'Create Category'"
+    [title]="'Edit Category'"
   ></eshop-admin-category-create-edit-shared>
 
   <nx-suite-ui-button
     [disabled]="!createCategoryForm.valid"
     [appearance]="'primary'"
     [size]="'m'"
-    (onClick)="create()"
-    >Create</nx-suite-ui-button
+    (onClick)="update()"
+    >Update</nx-suite-ui-button
   >
 </nx-suite-ui-loader>

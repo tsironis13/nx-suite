@@ -7,7 +7,7 @@ export function provideSortingDefaultConfigToken<Z extends Entity>() {
     providedIn: 'root',
     factory: () => {
       return {
-        sortOrder: 'desc',
+        sortOrder: -1,
         sortBy: 'id',
       };
     },

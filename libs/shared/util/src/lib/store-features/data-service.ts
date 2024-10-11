@@ -14,7 +14,14 @@ import { delay, exhaustMap, Observable, pipe, switchMap } from 'rxjs';
 import { AlertService } from '../services';
 import { PAGINATION_DEFAULT_CONFIG } from '../tokens';
 import { provideSortingDefaultConfigToken } from '../tokens/sorting';
-import { Entity, EntityFilterData, Filter, Pagination } from '../types';
+import {
+  EntitiesPagination,
+  Entity,
+  EntityFilterData,
+  Filter,
+  Pagination,
+  Sort,
+} from '../types';
 import {
   NamedCallStateSlice,
   setError,
@@ -28,8 +35,11 @@ export interface DataService<
   F extends Filter,
   Z extends Record<string, unknown>
 > {
-  getByFilterAndPagination(params: EntityFilterData<E, F>): Observable<E[]>;
+  getByFilterAndPagination(
+    params: EntityFilterData<E, F>
+  ): Observable<EntitiesPagination<E>>;
   create(params: Z): Observable<Partial<E>[]>;
+  getById(id: number): Observable<Partial<E>[]>;
 }
 
 export function withDataService<
@@ -49,6 +59,10 @@ export function withDataService<
         entities: Signal<Entity[]>;
       }>(),
     },
+    withState<{ totalCount: number }>(() => ({ totalCount: 0 })),
+    withState<{ selectedEntity: Partial<E> | null }>(() => ({
+      selectedEntity: null,
+    })),
     withState<EntityFilterData<E, F>>(
       (
         pagination = inject(PAGINATION_DEFAULT_CONFIG),
@@ -73,9 +87,19 @@ export function withDataService<
     withMethods((store) => {
       const dataService = inject(dataServiceType);
       const alertService = inject(AlertService);
+      const pagination = inject(PAGINATION_DEFAULT_CONFIG);
       return {
         updatePagination(pagination: Pagination): void {
           return patchState(store, { pagination });
+        },
+        updateSort(sort: Sort<E>): void {
+          return patchState(store, {
+            sort,
+            pagination: {
+              ...store.pagination(),
+              pageNumber: pagination.pageNumber,
+            },
+          });
         },
         updateFilter(filter: F): void {
           return patchState(store, { filters: filter });
@@ -87,6 +111,7 @@ export function withDataService<
               delay(500),
               tapResponse({
                 next: (entities) => {
+                  console.log('create');
                   alertService.showNotification(
                     'Entity created successfully!',
                     'Success!',
@@ -118,12 +143,28 @@ export function withDataService<
         getByFilterAndPagination: rxMethod<EntityFilterData<E, F>>(
           pipe(
             switchMap((params) => {
+              console.log('getByFilterAndPagination');
               patchState(store, setLoading('entity'));
               return dataService.getByFilterAndPagination(params).pipe(
                 tapResponse({
-                  next: (entities) => {
+                  next: (response) => {
                     patchState(store, setLoaded('entity'));
-                    patchState(store, setAllEntities(entities));
+                    patchState(store, { totalCount: response.totalCount });
+                    patchState(store, setAllEntities(response.items));
+                  },
+                  error: console.error,
+                })
+              );
+            })
+          )
+        ),
+        getById: rxMethod<number>(
+          pipe(
+            switchMap((id: number) => {
+              return dataService.getById(+id).pipe(
+                tapResponse({
+                  next: (response) => {
+                    patchState(store, { selectedEntity: response[0] });
                   },
                   error: console.error,
                 })

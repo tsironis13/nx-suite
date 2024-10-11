@@ -1,3 +1,16 @@
+@if (iconButton()) {
+<button
+  [appearance]="appearance()"
+  [iconStart]="iconButtonStart()"
+  [size]="size()"
+  tuiIconButton
+  type="button"
+  [style.border-radius.%]="iconButton()?.borderRadius"
+  (click)="onClick.emit()"
+>
+  <ng-content></ng-content>
+</button>
+} @else {
 <button
   [disabled]="disabled()"
   [size]="size()"
@@ -8,3 +21,4 @@
 >
   <ng-content></ng-content>
 </button>
+}

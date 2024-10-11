@@ -7,7 +7,7 @@ export const PAGINATION_DEFAULT_CONFIG = new InjectionToken<Pagination>(
     providedIn: 'root',
     factory: () => {
       return {
-        pageSize: 25,
+        pageSize: 10,
         pageNumber: 1,
       };
     },

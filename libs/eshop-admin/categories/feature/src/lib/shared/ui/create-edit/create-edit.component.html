@@ -1,0 +1,40 @@
+<form [formGroup]="createCategoryForm" class="grid grid-cols-2 gap-3">
+  <nx-suite-ui-input
+    [fControl]="{
+      key: 'name',
+      validators: [validators.required],
+      placeHolder: 'Name',
+      defaultValue: createCategoryForm.getRawValue()
+    }"
+    >Name *</nx-suite-ui-input
+  >
+
+  <nx-suite-ui-input
+    [fControl]="{
+      key: 'description',
+      validators: null,
+      placeHolder: 'Description',
+      defaultValue: createCategoryForm.getRawValue()
+    }"
+    >Description</nx-suite-ui-input
+  >
+
+  <nx-suite-ui-loader
+    [showLoader]="categoryStore.categoriesAllLoading()"
+    [overlay]="true"
+  >
+    <nx-suite-ui-select
+      [data]="categoryStore.allWithKeys()"
+      [dataLabelKey]="'name'"
+      [fControl]="{
+        key: 'parentCategoryId',
+        validators: null,
+        defaultValue: createCategoryForm.getRawValue()
+      }"
+      [clearItem]="true"
+      >Select Parent Category</nx-suite-ui-select
+    >
+  </nx-suite-ui-loader>
+</form>
+
+<div class="my-3">Fields marked with * are required.</div>

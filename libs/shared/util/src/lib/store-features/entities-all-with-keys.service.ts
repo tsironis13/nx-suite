@@ -45,7 +45,6 @@ export function withEntitiesAllService<
     methods: {
       getAllWithKeys: <Z extends Entity>(param: (keyof Z)[]) => void;
       allGetById: (id: number) => Partial<E>;
-      allAddEntityIfNotExists: (entity: E) => void;
     };
   }
 >;
@@ -70,20 +69,10 @@ export function withEntitiesAllService<
         allGetById(id: number) {
           return store.allWithKeys().find((c) => c.id === id);
         },
-        allAddEntityIfNotExists(entity: E) {
-          if (!entity) {
-            return;
-          }
-
-          if (!this.allGetById(entity.id as number)) {
-            patchState(store, {
-              allWithKeys: [...store.allWithKeys(), entity],
-            });
-          }
-        },
         getAllWithKeys: rxMethod<(keyof E)[]>(
           pipe(
             switchMap((params) => {
+              console.log(params);
               patchState(store, setLoading(prop));
               return dataService.getAllWithKeys(params).pipe(
                 delay(100),

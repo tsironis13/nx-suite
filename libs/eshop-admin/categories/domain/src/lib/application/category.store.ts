@@ -31,10 +31,8 @@ export const CategoryStore = signalStore(
         pipe(
           filter((x) => x),
           tap(() => {
-            const lastInsertedCategory =
-              store.entities()[store.entities().length - 1];
-
-            store.allAddEntityIfNotExists(lastInsertedCategory);
+            store.getAllWithKeys<Category>(['id', 'name']);
+            store.updateSort({ sortBy: 'id', sortOrder: 1 });
           })
         )
       ),

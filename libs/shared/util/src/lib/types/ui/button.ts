@@ -5,4 +5,10 @@ export type ButtonAppearance =
   | 'secondary'
   | 'accent'
   | 'destructive'
+  | 'outline'
   | 'flat';
+
+export type ButtonIcon = {
+  iconStart: string;
+  borderRadius?: number;
+};

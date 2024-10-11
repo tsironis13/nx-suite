@@ -10,13 +10,14 @@ import {
 } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { withComponentInputBinding } from '@angular/router';
 import { provideTrpcClient } from '@nx-suite/shared/domain/trpc-client';
 import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideExperimentalZonelessChangeDetection(),
-    provideFileRouter(),
+    provideFileRouter(withComponentInputBinding()),
     provideClientHydration(),
     provideHttpClient(
       withFetch(),

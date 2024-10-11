@@ -23,7 +23,6 @@ interface BreadcrumbComponent<T> {
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  //host: { ngSkipHydration: 'true' }, //to investigate
 })
 export class NxSuiteUiBreadcrumbComponent<T extends CaptionLink>
   implements BreadcrumbComponent<T>

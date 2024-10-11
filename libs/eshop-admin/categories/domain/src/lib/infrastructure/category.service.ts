@@ -3,6 +3,7 @@ import { injectTrpcClient } from '@nx-suite/shared/domain/trpc-client';
 import {
   DataService,
   EntitiesAllService,
+  EntitiesPagination,
   EntityFilterData,
   Filter,
 } from '@nx-suite/shared/util';
@@ -21,12 +22,12 @@ export class CategoryService
 
   getByFilterAndPagination(
     params: EntityFilterData<Category, Filter>
-  ): Observable<Category[]> {
+  ): Observable<EntitiesPagination<Category>> {
     console.log(params);
     return this.#trpc.productCategory.getPaginated.query({
       pagination: params.pagination,
       sort: params.sort,
-    });
+    }) as Observable<EntitiesPagination<Category>>;
   }
 
   getAllWithKeys(
@@ -37,5 +38,9 @@ export class CategoryService
 
   create(params: CategoryForm): Observable<Partial<Category>[]> {
     return this.#trpc.productCategory.create.mutate(params);
+  }
+
+  getById(id: number): Observable<Partial<Category>[]> {
+    return this.#trpc.productCategory.getById.query(id);
   }
 }

@@ -1,98 +1,61 @@
-<!-- <div> -->
-
-<!-- <tr tuiThGroup>
-      @for (item of columns1; track $index) {
-      <th *tuiHead="item" tuiSortable fs tuiTh>{{ item }}</th>
-      }
-    </tr> -->
-
+<div>Current page: {{ pagination().pageNumber }}</div>
 <table
-  *ngIf="data123 as data"
   tuiTable
-  class="table"
-  [columns]="columns123"
-  [tuiSortBy]="sorter$ | async"
-  (tuiSortByChange)="sorter$.next($event!)"
+  class="table w-full"
+  [columns]="mappedColumns()"
+  [direction]="sortOrder().sortOrder"
+  [tuiSortBy]="sortOrder().sortBy"
+  (tuiSortByChange)="onSortOrder($event)"
+  (directionChange)="onDirection($event)"
 >
   <thead>
     <tr tuiThGroup>
-      <th *tuiHead="'name'" tuiSortable tuiTh>Name</th>
-      <th *tuiHead="'dob'" tuiSortable tuiTh>Date of Birth</th>
-      <th *tuiHead="'age'" tuiSortable tuiTh [requiredSort]="true">Age</th>
-    </tr>
-  </thead>
-  <tbody
-    *tuiLet="data | tuiTableSort as sortedData"
-    tuiTbody
-    [data]="sortedData"
-  >
-    <tr *ngFor="let item of sortedData" tuiTr>
-      <td *tuiCell="'name'" tuiTd>
-        {{ item.name }}
-      </td>
-      <td *tuiCell="'dob'" tuiTd>
-        {{ item.dob }}
-      </td>
-      <td *tuiCell="'age'" tuiTd>
-        {{ item.age }}
-      </td>
-    </tr>
-  </tbody>
-  <!-- <tfoot>
-        <tr>
-            <td [colSpan]="columns.length">
-                <tui-table-pagination
-                    class="tui-space_top-2"
-                    [total]="(total$ | async) || 0"
-                    (paginationChange)="onPagination($event)"
-                />
-            </td>
-        </tr>
-    </tfoot> -->
-</table>
-
-<!-- <table
-  tuiTable
-  [columns]="columns1"
-  [tuiSortBy]="sorter$ | async"
-  class="w-full"
->
-  <thead>
-    <tr tuiThGroup>
-      @for (item of columns1; track $index) {
-      <th *tuiHead="item" tuiSortable tuiTh>{{ item }}</th>
+      @for (column of columns(); track $index) {
+      <th
+        *tuiHead="column.field"
+        [tuiSortable]="!column.metaData?.disableSort"
+        tuiTh
+        [requiredSort]="true"
+      >
+        {{ column.header }}
+      </th>
       }
     </tr>
   </thead>
-  <tbody tuiTbody>
-    <tr tuiTr>
-      <td tuiTd>1</td>
-      <td tuiTd>1</td>
-      <td tuiTd>1</td>
-      <td tuiTd>1</td>
-    </tr>
-  </tbody>
-</table> -->
-
-<!-- @for (item of sortedData; track $index) {
+  <tbody *tuiLet="data() as sortedData" tuiTbody [data]="sortedData">
+    @for (item of sortedData; track $index) {
     <tr tuiTr>
       @for (column of columns(); track $index;) { @let cField = column.field |
-      toString;
+      toString; @if (column.metaData?.type === 'contextMenu') {
+      <td *tuiCell="cField" tuiTd>
+        <ng-container
+          *ngTemplateOutlet="
+            contextMenu()?.templateRef || emptyContextMenuRef;
+            context: { $implicit: { item } }
+          "
+        ></ng-container>
+      </td>
+      } @else {
       <td *tuiCell="cField" tuiTd>
         {{ item[column.field] }}
       </td>
-      @if (column.metaData?.type === 'template') {
-      <td *tuiCell="'t'" tuiTd>
-        <ng-container [ngTemplateOutlet]="contextMenu()"> </ng-container>
-      </td>
       } }
     </tr>
+    }
+  </tbody>
+  <tfoot>
+    <tr>
+      <td [colSpan]="columns().length">
+        <tui-table-pagination
+          class="tui-space_top-2"
+          [total]="totalCount()"
+          [page]="pagination().pageNumber - 1"
+          [size]="pagination().pageSize"
+          (paginationChange)="onPagination($event)"
+        />
+      </td>
+    </tr>
+  </tfoot>
+</table>
 
-    } -->
-<!-- <tui-table-pagination
-  [page]="page"
-  [size]="size1"
-  [total]="237"
-  (paginationChange)="onPagination($event)"
-/> -->
-<!-- </div> -->
+<ng-template #emptyContextMenuRef>No Context Menu Template</ng-template>
