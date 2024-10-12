@@ -25,6 +25,7 @@ import { injectTrpcClient } from '../../trpc-client';
   template: `
     <main class="flex-1 mx-auto">
       <section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+        <a href="http://localhost:4200/" target="blank">Go to admin</a>
         <div class="flex max-w-[64rem] flex-col items-center gap-4 text-center">
           <img
             class="h-12 w-12"

@@ -111,7 +111,6 @@ export function withDataService<
               delay(500),
               tapResponse({
                 next: (entities) => {
-                  console.log('create');
                   alertService.showNotification(
                     'Entity created successfully!',
                     'Success!',
