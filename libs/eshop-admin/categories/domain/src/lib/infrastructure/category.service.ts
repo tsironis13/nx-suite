@@ -33,14 +33,20 @@ export class CategoryService
   getAllWithKeys(
     keysToReturn: (keyof Category)[]
   ): Observable<Partial<Category>[]> {
-    return this.#trpc.productCategory.list.query(keysToReturn);
+    return this.#trpc.productCategory.list.query(keysToReturn) as Observable<
+      Partial<Category>[]
+    >;
   }
 
   create(params: CategoryForm): Observable<Partial<Category>[]> {
-    return this.#trpc.productCategory.create.mutate(params);
+    return this.#trpc.productCategory.create.mutate(params) as Observable<
+      Partial<Category>[]
+    >;
   }
 
   getById(id: number): Observable<Partial<Category>[]> {
-    return this.#trpc.productCategory.getById.query(id);
+    return this.#trpc.productCategory.getById.query(id) as Observable<
+      Partial<Category>[]
+    >;
   }
 }

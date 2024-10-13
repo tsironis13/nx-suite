@@ -24,7 +24,7 @@ export class EshopAdminCategoryCreateComponent
   extends CategoryCreateEditSharedComponent
   implements OnInit
 {
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.headerNavigationStore.setTitle('Create Category');
   }
 

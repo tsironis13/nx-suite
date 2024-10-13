@@ -54,7 +54,7 @@ export default defineConfig(({ mode }) => {
         targets: [
           {
             src: '../../node_modules/@taiga-ui/icons/src/**',
-            dest: '/assets/taiga-ui/icons',
+            dest: './assets/taiga-ui/icons',
           },
         ],
       }),

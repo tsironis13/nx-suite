@@ -33,12 +33,16 @@ export class EshopAdminCategoryEditComponent
   constructor() {
     super();
     effect(() => {
-      this.createCategoryForm.patchValue(this.categoryStore.selectedEntity());
+      const x = this.categoryStore.selectedEntity();
+      if (x) {
+        this.createCategoryForm.patchValue(x);
+      }
+
       console.log(this.categoryStore.selectedEntity());
     });
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.headerNavigationStore.setTitle('Edit Category');
 
     this.categoryStore.getById(this.id());

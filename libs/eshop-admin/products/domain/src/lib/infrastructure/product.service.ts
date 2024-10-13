@@ -25,7 +25,11 @@ export class ProductService
     return;
   }
 
-  create(params: any) {
+  create(params: any): any {
+    return null;
+  }
+
+  getById(id: number): any {
     return null;
   }
 }
