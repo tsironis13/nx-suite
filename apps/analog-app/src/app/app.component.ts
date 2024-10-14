@@ -6,11 +6,11 @@ import { TuiRoot } from '@taiga-ui/core';
   selector: 'analog-app-root',
   standalone: true,
   imports: [TuiRoot, NxSuiteUiButtonComponent],
-  template: `<tui-root>
+  template: `
     <nx-suite-ui-button [disabled]="false" [appearance]="'primary'" [size]="'m'"
       >Create</nx-suite-ui-button
     >
-  </tui-root> `,
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
