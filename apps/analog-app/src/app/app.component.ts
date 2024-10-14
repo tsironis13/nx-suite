@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NxSuiteUiButtonComponent } from '@nx-suite/shared/ui';
 import { TuiRoot } from '@taiga-ui/core';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { ShellComponent } from '@nx-suite/eshop-admin/shell';
 
 @Component({
   selector: 'analog-app-root',
   standalone: true,
-  imports: [TuiRoot, ShellComponent],
+  imports: [TuiRoot, NxSuiteUiButtonComponent],
   template: `<tui-root>
-    <eshop-admin-shell class="block h-full"></eshop-admin-shell>
+    <nx-suite-ui-button [disabled]="false" [appearance]="'primary'" [size]="'m'"
+      >Create</nx-suite-ui-button
+    >
   </tui-root> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
