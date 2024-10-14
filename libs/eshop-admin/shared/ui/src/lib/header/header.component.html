@@ -1,72 +1,10 @@
 <header tuiNavigationHeader>
-  <button title="Menu" tuiIconButton tuiNavigationDrawer type="button">
-    <!-- <tui-data-list>
-            <tui-opt-group
-                *ngFor="let group of drawer | keyvalue"
-                [label]="group.key"
-            >
-                <button
-                    *ngFor="let item of group.value"
-                    tuiOption
-                    type="button"
-                    (click)="open = false"
-                >
-                    <img
-                        alt="icon"
-                        [src]="item.icon"
-                    />
-                    {{ item.name }}
-                </button>
-            </tui-opt-group>
-            <tui-opt-group>
-                <label tuiOption>
-                    <input
-                        size="s"
-                        tuiSwitch
-                        type="checkbox"
-                        [(ngModel)]="switch"
-                    />
-                    Dark mode
-                </label>
-            </tui-opt-group>
-        </tui-data-list> -->
+  <button title="Menu" tuiIconButton tuiNavigationDrawer type="button">    
   </button>
   <span tuiNavigationLogo>
     <tui-icon icon="@tui.home" />
     <span tuiFade>A very very long product name</span>
     <tui-badge>Test</tui-badge>
-  </span>
-  <button
-    appearance="secondary"
-    tuiButton
-    tuiChevron
-    tuiDropdownOpen
-    type="button"
-    [tuiDropdown]="products"
-  >
-    <span tuiFade>A very very long project</span>
-    <ng-template #products>
-      <tui-data-list size="s">
-        <button tuiOption type="button">
-          A very very long project
-          <tui-icon
-            icon="@tui.check"
-            [style.font-size.em]="1"
-            [style.margin-left.rem]="0.5"
-          />
-        </button>
-        <button tuiOption type="button">Something else</button>
-      </tui-data-list>
-    </ng-template>
-  </button>
-  <hr />
-  <button appearance="secondary" iconStart="@tui.plus" tuiButton type="button">
-    Create
-  </button>
-  <button iconStart="@tui.bell" tuiIconButton type="button">
-    Notifications
-    <tui-badge-notification />
-  </button>
-  <button iconStart="@tui.ellipsis" tuiIconButton type="button">More</button>
-  <tui-avatar src="AI" />
+  </span>  
+  <hr />  
 </header>

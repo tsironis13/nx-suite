@@ -24,67 +24,15 @@ const ICON =
 @Component({
   selector: 'eshop-admin-header',
   standalone: true,
-  imports: [
-    CommonModule,
-    // FormsModule,
-    // KeyValuePipe,
-    // NgForOf,
-    RouterOutlet,
-    // RouterLink,
-    // RouterLinkActive,
-    // TuiAppearance,
-    TuiAvatar,
+  imports: [           
     TuiNavigation,
     TuiIcon,
-    TuiBadge,
-    TuiBadgeNotification,
-    // TuiButton,
-    // TuiCardLarge,
-    // TuiChevron,
-    TuiDataList,
-    TuiDataListDropdownManager,
-    TuiDropdown,
-    // TuiFade,
-    // TuiHeader,
-
-    TuiRepeatTimes,
-    // TuiSurface,
-    // TuiSwitch,
-    TuiTabs,
-    // TuiTitle,
+    TuiBadge    
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   providers: [TuiDropdownService, TuiAsideComponent, TuiIcons],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [
-  //   {
-  //     provide: TUI_ICON_RESOLVER,
-  //     deps: [[new SkipSelf(), TUI_ICON_RESOLVER]],
-  //     useFactory(defaultResolver: TuiStringHandler<string>) {
-  //       return (name: string) =>
-  //         name.startsWith('@tui.')
-  //           ? defaultResolver(name)
-  //           : `/assets/icons/${name}.svg`;
-  //     },
-  //   },
-  // ],
 })
-export class EshopAdminHeaderComponent {
-  protected expanded = false;
-  protected open = false;
-  protected switch = false;
-
-  protected readonly drawer = {
-    Components: [
-      { name: 'Button', icon: ICON },
-      { name: 'Input', icon: ICON },
-      { name: 'Tooltip', icon: ICON },
-    ],
-    Essentials: [
-      { name: 'Getting started', icon: ICON },
-      { name: 'Showcase', icon: ICON },
-      { name: 'Typography', icon: ICON },
-    ],
-  };
+export class EshopAdminHeaderComponent {  
 }
