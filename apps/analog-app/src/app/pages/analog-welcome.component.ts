@@ -129,6 +129,7 @@ import { injectTrpcClient } from '../../trpc-client';
         </ng-template>
       </section>
     </main>
+    <analog-app-profile-list></analog-app-profile-list>
   `,
 })
 export class AnalogWelcomeComponent {

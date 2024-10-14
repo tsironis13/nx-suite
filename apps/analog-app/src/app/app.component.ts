@@ -1,16 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { NxSuiteUiButtonComponent } from '@nx-suite/shared/ui';
-import { TuiRoot } from '@taiga-ui/core';
 
 @Component({
   selector: 'analog-app-root',
   standalone: true,
-  imports: [TuiRoot, NxSuiteUiButtonComponent],
-  template: `
-    <nx-suite-ui-button [disabled]="false" [appearance]="'primary'" [size]="'m'"
-      >Create</nx-suite-ui-button
-    >
-  `,
+  imports: [RouterOutlet, NxSuiteUiButtonComponent],
+  template: ` <router-outlet></router-outlet> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
