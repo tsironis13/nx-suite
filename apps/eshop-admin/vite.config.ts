@@ -35,6 +35,9 @@ export default defineConfig(({ mode }) => {
       analog({
         ssr: true,
         nitro: {
+          externals: {
+            inline: ['tslib']
+          },
           rollupConfig: {
             plugins: [
               typescriptPaths({
