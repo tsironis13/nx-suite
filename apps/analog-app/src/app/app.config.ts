@@ -1,31 +1,30 @@
-import { NG_EVENT_PLUGINS } from "@taiga-ui/event-plugins";
-import { provideAnimations } from "@angular/platform-browser/animations";
-import {
-  ApplicationConfig,
-  provideExperimentalZonelessChangeDetection,
-} from '@angular/core';
+import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
 import {
   provideHttpClient,
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 
 import { provideTrpcClient } from '../trpc-client';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-        provideAnimations(),
-        provideExperimentalZonelessChangeDetection(),
+    provideExperimentalZonelessChangeDetection(),
     provideFileRouter(),
     provideClientHydration(),
     provideHttpClient(
       withFetch(),
       withInterceptors([requestContextInterceptor])
     ),
-
     provideTrpcClient(),
-        NG_EVENT_PLUGINS
-    ],
+    provideAnimations(),
+    NG_EVENT_PLUGINS,
+  ],
 };
