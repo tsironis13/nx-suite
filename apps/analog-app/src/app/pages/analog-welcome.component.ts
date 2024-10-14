@@ -1,11 +1,9 @@
-import { waitFor } from '@analogjs/trpc';
 import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProfileListComponent } from '@nx-suite/analog-app/profile/feature-profile-list';
-import { shareReplay, Subject, switchMap, take } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Note } from '../../note';
-import { injectTrpcClient } from '../../trpc-client';
 
 @Component({
   selector: 'analog-app-analog-welcome',
@@ -114,7 +112,7 @@ import { injectTrpcClient } from '../../trpc-client';
             <p class="mb-4">{{ note.note }}</p>
           </div>
 
-          <div
+          <!-- <div
             class="no-notes text-center rounded-xl p-20"
             *ngIf="notes.length === 0"
           >
@@ -122,7 +120,7 @@ import { injectTrpcClient } from '../../trpc-client';
             <p class="text-zinc-400">
               Add a new one and see them appear here...
             </p>
-          </div>
+          </div> -->
         </div>
         <ng-template #loading>
           <p class="text-center mt-4">Loading...</p>
@@ -133,16 +131,17 @@ import { injectTrpcClient } from '../../trpc-client';
   `,
 })
 export class AnalogWelcomeComponent {
-  private _trpc = injectTrpcClient();
+  //private _trpc = injectTrpcClient();
   public triggerRefresh$ = new Subject<void>();
-  public notes$ = this.triggerRefresh$.pipe(
-    switchMap(() => this._trpc.note.list.query()),
-    shareReplay(1)
-  );
+  notes$ = new BehaviorSubject<any[]>([]);
+  // public notes$ = this.triggerRefresh$.pipe(
+  //   switchMap(() => this._trpc.note.list.query()),
+  //   shareReplay(1)
+  // );
   public newNote = '';
 
   constructor() {
-    void waitFor(this.notes$);
+    // void waitFor(this.notes$);
     this.triggerRefresh$.next();
   }
 
@@ -155,18 +154,18 @@ export class AnalogWelcomeComponent {
       form.form.markAllAsTouched();
       return;
     }
-    this._trpc.note.create
-      .mutate({ note: this.newNote })
-      .pipe(take(1))
-      .subscribe(() => this.triggerRefresh$.next());
+    // this._trpc.note.create
+    //   .mutate({ note: this.newNote })
+    //   .pipe(take(1))
+    //   .subscribe(() => this.triggerRefresh$.next());
     this.newNote = '';
     form.form.reset();
   }
 
   public removeNote(id: number) {
-    this._trpc.note.remove
-      .mutate({ id })
-      .pipe(take(1))
-      .subscribe(() => this.triggerRefresh$.next());
+    // this._trpc.note.remove
+    //   .mutate({ id })
+    //   .pipe(take(1))
+    //   .subscribe(() => this.triggerRefresh$.next());
   }
 }
