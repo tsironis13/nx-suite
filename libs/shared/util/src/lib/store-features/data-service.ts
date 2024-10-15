@@ -151,7 +151,21 @@ export function withDataService<
                     patchState(store, { totalCount: response.totalCount });
                     patchState(store, setAllEntities(response.items));
                   },
-                  error: console.error,
+                  error:(error) => {                    
+                    alertService.showNotification(
+                      `An error occured while fetching entities! ${error}`,
+                      'An error occured!',
+                      'error'
+                    );
+  
+                    patchState(
+                      store,
+                      setError(
+                        error as string,
+                        'entity'
+                      ) as NamedCallStateSlice<'entity'>
+                    );
+                  },
                 })
               );
             })
