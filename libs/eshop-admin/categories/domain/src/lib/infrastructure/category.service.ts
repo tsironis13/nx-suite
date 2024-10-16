@@ -23,9 +23,9 @@ export class CategoryService
   test(params: any): any {
     console.log(params);
     const x = this.#trpc.test.getAll.query() as Observable<
-      EntitiesPagination<Category>
+      EntitiesPagination<any>
     >;
-    return x;
+    return x as any;
   }
 
   getByFilterAndPagination(
