@@ -39,7 +39,7 @@ export const productCategoryRouter = router({
         ),
       })
     )
-    .query(async ({ input }) => {      
+    .query(async ({ input }) => {
       const query = db
         .select({
           id: productCategories.id,
@@ -49,11 +49,11 @@ export const productCategoryRouter = router({
         })
         .from(productCategories)
         .leftJoin(parent, eq(parent.id, productCategories.parentCategoryId));
-        
+
       const totalCount = await db
         .select({ count: count() })
         .from(productCategories);
-      
+
       const sortBy = input.sort.sortBy as keyof ProductCategories;
       const sort =
         input.sort.sortOrder === -1
@@ -102,7 +102,7 @@ export const productCategoryRouter = router({
     .mutation(async ({ input }) => {
       return await db.insert(productCategories).values(input).returning();
     }),
-  getById: publicProcedure.input(z.number()).query(async ({ input }) => {    
+  getById: publicProcedure.input(z.number()).query(async ({ input }) => {
     return await db
       .select()
       .from(productCategories)

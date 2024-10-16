@@ -20,10 +20,17 @@ export class CategoryService
 {
   readonly #trpc = injectTrpcClient();
 
+  test(params: any): any {
+    console.log(params);
+    const x = this.#trpc.test.getAll.query() as Observable<
+      EntitiesPagination<Category>
+    >;
+    return x;
+  }
+
   getByFilterAndPagination(
     params: EntityFilterData<Category, Filter>
   ): Observable<EntitiesPagination<Category>> {
-    console.log(params);
     return this.#trpc.productCategory.getPaginated.query({
       pagination: params.pagination,
       sort: params.sort,

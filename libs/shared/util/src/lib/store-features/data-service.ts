@@ -40,6 +40,7 @@ export interface DataService<
   ): Observable<EntitiesPagination<E>>;
   create(params: Z): Observable<Partial<E>[]>;
   getById(id: number): Observable<Partial<E>[]>;
+  test(params: any): Observable<EntitiesPagination<E>>;
 }
 
 export function withDataService<
@@ -142,22 +143,21 @@ export function withDataService<
         getByFilterAndPagination: rxMethod<EntityFilterData<E, F>>(
           pipe(
             switchMap((params) => {
-              console.log('getByFilterAndPagination');
               patchState(store, setLoading('entity'));
-              return dataService.getByFilterAndPagination(params).pipe(
+              return dataService.test(params).pipe(
                 tapResponse({
                   next: (response) => {
                     patchState(store, setLoaded('entity'));
                     patchState(store, { totalCount: response.totalCount });
                     patchState(store, setAllEntities(response.items));
                   },
-                  error:(error) => {                    
+                  error: (error) => {
                     alertService.showNotification(
                       `An error occured while fetching entities! ${error}`,
                       'An error occured!',
                       'error'
                     );
-  
+
                     patchState(
                       store,
                       setError(
