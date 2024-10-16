@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
         '@trpc/server',
         '@ng-web-apis/**',
         '@taiga-ui/**',
+        '@nx-suite/**',
       ],
     },
 
@@ -36,7 +37,7 @@ export default defineConfig(({ mode }) => {
         ssr: true,
         nitro: {
           externals: {
-            inline: ['tslib']
+            inline: ['tslib'],
           },
           rollupConfig: {
             plugins: [

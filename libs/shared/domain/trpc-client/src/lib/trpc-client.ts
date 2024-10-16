@@ -6,12 +6,14 @@ import { httpBatchLink } from '@trpc/client';
 export const { provideTrpcClient, TrpcClient, TrpcHeaders } =
   createTrpcClient<AppRouter>({
     url: `/api/trpc`,
-    options:             {
-      links: [httpBatchLink({
-        url: getBaseUrl() + '/api/trpc'
-      })]
-    }
-  });  
+    options: {
+      links: [
+        httpBatchLink({
+          url: getBaseUrl() + '/api/trpc',
+        }),
+      ],
+    },
+  });
 
 export function injectTrpcClient() {
   return inject(TrpcClient);
