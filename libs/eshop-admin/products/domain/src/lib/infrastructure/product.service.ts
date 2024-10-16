@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { injectTrpcClient } from '@nx-suite/shared/domain/trpc-client';
-import {
-  DataService,
-  EntitiesPagination,
-  Pagination,
-} from '@nx-suite/shared/util';
-import { Observable } from 'rxjs';
+import { DataService, Pagination } from '@nx-suite/shared/util';
 import { Product } from '../entities';
 
 @Injectable({
@@ -16,9 +11,6 @@ export class ProductService
 {
   readonly #trpc = injectTrpcClient();
 
-  test(params: any): Observable<EntitiesPagination<Product>> {
-    return null as any;
-  }
   // public productCategories$ = this._trpc.productCategories.list.query();
 
   getByFilterAndPagination(params: any): any {

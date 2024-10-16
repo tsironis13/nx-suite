@@ -20,14 +20,6 @@ export class CategoryService
 {
   readonly #trpc = injectTrpcClient();
 
-  test(params: any): any {
-    console.log(params);
-    const x = this.#trpc.test.getAll.query() as Observable<
-      EntitiesPagination<any>
-    >;
-    return x as any;
-  }
-
   getByFilterAndPagination(
     params: EntityFilterData<Category, Filter>
   ): Observable<EntitiesPagination<Category>> {

@@ -40,7 +40,6 @@ export interface DataService<
   ): Observable<EntitiesPagination<E>>;
   create(params: Z): Observable<Partial<E>[]>;
   getById(id: number): Observable<Partial<E>[]>;
-  test(params: any): Observable<EntitiesPagination<E>>;
 }
 
 export function withDataService<
@@ -144,7 +143,7 @@ export function withDataService<
           pipe(
             switchMap((params) => {
               patchState(store, setLoading('entity'));
-              return dataService.test(params).pipe(
+              return dataService.getByFilterAndPagination(params).pipe(
                 tapResponse({
                   next: (response) => {
                     patchState(store, setLoaded('entity'));

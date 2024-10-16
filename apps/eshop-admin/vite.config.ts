@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => {
         '@trpc/server',
         '@ng-web-apis/**',
         '@taiga-ui/**',
-        '@nx-suite/**',
       ],
     },
 
