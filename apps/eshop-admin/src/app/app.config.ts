@@ -8,7 +8,10 @@ import {
   ApplicationConfig,
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
-import { provideClientHydration } from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { withComponentInputBinding } from '@angular/router';
 import { provideTrpcClient } from '@nx-suite/shared/domain/trpc-client';
@@ -18,7 +21,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideExperimentalZonelessChangeDetection(),
     provideFileRouter(withComponentInputBinding()),
-    provideClientHydration(),
+    provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(),
       withInterceptors([requestContextInterceptor])
