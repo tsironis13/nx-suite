@@ -4,15 +4,15 @@ import { signalStore, withHooks, withMethods } from '@ngrx/signals';
 import { withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import {
-  withDataService,
-  withEntitiesAllService,
-  withFormStateService,
-} from '@nx-suite/shared/util';
+  withCrudDataService,
+  withEntitiesService,
+  withFormService,
+} from '@nx-suite/shared/domain';
 import { filter, pipe, tap } from 'rxjs';
 import { Category, CategoryForm } from '../entities';
 import { CategoryService } from '../infrastructure';
 
-export const withCategoriesAllService = withEntitiesAllService<
+export const withCategoriesAllService = withEntitiesService<
   Category,
   CategoryService,
   'categoriesAll'
@@ -23,8 +23,8 @@ export const CategoryStore = signalStore(
   withDevtools('categories'),
   withCategoriesAllService,
   withEntities<Category>(),
-  withFormStateService<CategoryForm>(new FormGroup({})),
-  withDataService(CategoryService, { name: '' }),
+  withFormService<CategoryForm>(new FormGroup({})),
+  withCrudDataService(CategoryService, { name: '' }),
   withMethods((store) => {
     return {
       onCategoryCreated: rxMethod<boolean>(

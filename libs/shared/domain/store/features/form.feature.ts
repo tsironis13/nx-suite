@@ -8,10 +8,10 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { FormGroupMap } from '@nx-suite/shared/util';
 import { pipe, tap } from 'rxjs';
-import { FormGroupMap } from '../types';
 
-export function withFormStateService<E extends Record<string, unknown>>(
+export function withFormService<E extends Record<string, unknown>>(
   fg: FormGroup<FormGroupMap<E>> | FormGroup<Record<never, never>>
 ) {
   return signalStoreFeature(

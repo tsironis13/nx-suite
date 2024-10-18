@@ -15,5 +15,4 @@ export type AlertAppearance =
   | 'success'
   | 'textfield'
   | 'warning'
-  | 'whiteblock'
-  | (Record<never, never> & string);
+  | 'whiteblock';

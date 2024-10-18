@@ -44,7 +44,7 @@
         "libs/eshop-admin/shared/util/src/index.ts"
       ],
       "@nx-suite/eshop-admin/shell": ["libs/eshop-admin/shell/src/index.ts"],
-      "@nx-suite/shared/domain": ["libs/shared/domain/src/index.ts"],
+      "@nx-suite/shared/domain": ["libs/shared/domain/index.ts"],
       "@nx-suite/shared/domain/trpc-client": [
         "libs/shared/domain/trpc-client/src/index.ts"
       ],

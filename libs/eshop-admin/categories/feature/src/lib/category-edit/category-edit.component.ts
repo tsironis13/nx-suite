@@ -1,4 +1,12 @@
-import { Component, effect, input, InputSignal, OnInit } from '@angular/core';
+import {
+  Component,
+  effect,
+  input,
+  InputSignal,
+  OnDestroy,
+  OnInit,
+  untracked,
+} from '@angular/core';
 import {
   NxSuiteUiButtonComponent,
   NxSuiteUiInputComponent,
@@ -26,26 +34,29 @@ interface EshopAdminCategoryEdit {
 })
 export class EshopAdminCategoryEditComponent
   extends CategoryCreateEditSharedComponent
-  implements EshopAdminCategoryEdit, OnInit
+  implements EshopAdminCategoryEdit, OnInit, OnDestroy
 {
   public readonly id = input.required<number>();
 
-  constructor() {
-    super();
-    effect(() => {
-      const x = this.categoryStore.selectedEntity();
-      if (x) {
-        this.createCategoryForm.patchValue(x);
-      }
+  readonly #fetchCategoryEffect = effect(() => {
+    const entity = this.categoryStore.entity();
 
-      console.log(this.categoryStore.selectedEntity());
+    untracked(() => {
+      if (entity) {
+        console.log(entity);
+        this.createCategoryForm.patchValue(entity);
+      }
     });
-  }
+  });
 
   override ngOnInit(): void {
     this.headerNavigationStore.setTitle('Edit Category');
 
     this.categoryStore.getById(this.id());
+  }
+
+  ngOnDestroy(): void {
+    this.categoryStore.updateEntity(null);
   }
 
   update(): void {

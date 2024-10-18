@@ -1,9 +1,8 @@
 import { InjectionToken } from '@angular/core';
 import { Pagination } from '../types';
 
-export const PAGINATION_DEFAULT_CONFIG = new InjectionToken<Pagination>(
-  'pagination_default_config',
-  {
+export function providePaginationDefaultConfigToken() {
+  return new InjectionToken<Pagination>('pagination_default_config', {
     providedIn: 'root',
     factory: () => {
       return {
@@ -11,5 +10,5 @@ export const PAGINATION_DEFAULT_CONFIG = new InjectionToken<Pagination>(
         pageNumber: 1,
       };
     },
-  }
-);
+  });
+}

@@ -1,7 +1,7 @@
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import { patchState, signalStore, withHooks, withMethods } from '@ngrx/signals';
 import { addEntity, withEntities } from '@ngrx/signals/entities';
-import { withDataService, withFormStateService } from '@nx-suite/shared/util';
+import { withCrudDataService, withFormService } from '@nx-suite/shared/domain';
 import { Product } from '../entities';
 import { ProductService } from '../infrastructure';
 
@@ -9,8 +9,8 @@ export const ProductStore = signalStore(
   { providedIn: 'root' },
   withDevtools('products'),
   withEntities<Product>(),
-  withFormStateService({} as any),
-  withDataService(ProductService, { pageSize: 10, pageNumber: 1 }),
+  withFormService({} as any),
+  withCrudDataService(ProductService, { pageSize: 10, pageNumber: 1 }),
   withMethods((store) => ({
     addTodo(todo: Product): void {
       patchState(store, addEntity(todo));

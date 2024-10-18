@@ -9,26 +9,32 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { Entity } from '@nx-suite/shared/util';
 import { delay, Observable, pipe, switchMap } from 'rxjs';
-import { Entity } from '../types';
 import {
   NamedCallStateComputed,
   setLoaded,
   setLoading,
   withCallStateService,
-} from './call-state.service';
+} from './call-state.feature';
 
 type WithAllEntitiesStateComputed = {
   entitiesAll: Signal<Entity[]>;
 };
 
-export interface EntitiesAllService<E extends Entity> {
+export interface EntitiesService<E extends Entity> {
   getAllWithKeys(params: (keyof E)[]): Observable<Partial<E>[]>;
 }
 
-export function withEntitiesAllService<
+/**
+ * Signal Store feature to fetch all entities data
+ * for dropdown manipulation **To be revised if needed**
+ * @param dataServiceType
+ * @param prop
+ */
+export function withEntitiesService<
   E extends Entity,
-  S extends EntitiesAllService<E>,
+  S extends EntitiesService<E>,
   Prop extends string
 >(
   dataServiceType: Type<S>,
@@ -44,14 +50,13 @@ export function withEntitiesAllService<
     computed: NamedCallStateComputed<Prop> & WithAllEntitiesStateComputed;
     methods: {
       getAllWithKeys: <Z extends Entity>(param: (keyof Z)[]) => void;
-      allGetById: (id: number) => Partial<E>;
     };
   }
 >;
 
-export function withEntitiesAllService<
+export function withEntitiesService<
   E extends Entity,
-  S extends EntitiesAllService<E>
+  S extends EntitiesService<E>
 >(dataServiceType: Type<S>, prop: string): SignalStoreFeature {
   return signalStoreFeature(
     withState<{ allWithKeys: Partial<E>[] }>(() => ({
@@ -66,9 +71,6 @@ export function withEntitiesAllService<
     withMethods((store) => {
       const dataService = inject(dataServiceType);
       return {
-        allGetById(id: number) {
-          return store.allWithKeys().find((c) => c.id === id);
-        },
         getAllWithKeys: rxMethod<(keyof E)[]>(
           pipe(
             switchMap((params) => {
@@ -78,8 +80,11 @@ export function withEntitiesAllService<
                 delay(100),
                 tapResponse({
                   next: (entities) => {
-                    patchState(store, setLoaded(prop));
-                    patchState(store, { allWithKeys: entities });
+                    patchState(
+                      store,
+                      { allWithKeys: entities },
+                      setLoaded(prop)
+                    );
                   },
                   error: (e) => console.log(e),
                 })

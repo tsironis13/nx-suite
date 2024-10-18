@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
+  "sideEffects": false,
   "dependencies": {
     "@analogjs/content": "^1.3.0",
     "@analogjs/router": "^1.3.0",

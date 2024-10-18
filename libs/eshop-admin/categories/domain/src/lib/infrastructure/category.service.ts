@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
+import { CrudDataService, EntitiesService } from '@nx-suite/shared/domain';
 import { injectTrpcClient } from '@nx-suite/shared/domain/trpc-client';
 import {
-  DataService,
-  EntitiesAllService,
   EntitiesPagination,
   EntityFilterData,
   Filter,
@@ -15,8 +14,8 @@ import { Category, CategoryForm } from '../entities';
 })
 export class CategoryService
   implements
-    DataService<Category, Filter, CategoryForm>,
-    EntitiesAllService<Category>
+    CrudDataService<Category, Filter, CategoryForm>,
+    EntitiesService<Category>
 {
   readonly #trpc = injectTrpcClient();
 

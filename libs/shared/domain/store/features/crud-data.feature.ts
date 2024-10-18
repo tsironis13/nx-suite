@@ -10,27 +10,27 @@ import {
 } from '@ngrx/signals';
 import { addEntities, EntityId, setAllEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { delay, exhaustMap, Observable, pipe, switchMap } from 'rxjs';
-import { AlertService } from '../services';
-import { PAGINATION_DEFAULT_CONFIG } from '../tokens';
-import { provideSortingDefaultConfigToken } from '../tokens/sorting';
 import {
   EntitiesPagination,
   Entity,
   EntityFilterData,
   Filter,
   Pagination,
+  providePaginationDefaultConfigToken,
+  provideSortingDefaultConfigToken,
   Sort,
-} from '../types';
+} from '@nx-suite/shared/util';
+import { delay, exhaustMap, Observable, pipe, switchMap } from 'rxjs';
 import {
   NamedCallStateSlice,
   setError,
   setLoaded,
   setLoading,
   withCallStateService,
-} from './call-state.service';
+} from './call-state.feature';
+import { withNotificationService } from './notification.feature';
 
-export interface DataService<
+export interface CrudDataService<
   E extends Entity,
   F extends Filter,
   Z extends Record<string, unknown>
@@ -42,11 +42,11 @@ export interface DataService<
   getById(id: number): Observable<Partial<E>[]>;
 }
 
-export function withDataService<
+export function withCrudDataService<
   E extends Entity,
   F extends Filter,
   Z extends Record<string, unknown>,
-  S extends DataService<E, F, Z>
+  S extends CrudDataService<E, F, Z>
 >(dataServiceType: Type<S>, filters: F) {
   return signalStoreFeature(
     {
@@ -59,13 +59,9 @@ export function withDataService<
         entities: Signal<Entity[]>;
       }>(),
     },
-    withState<{ totalCount: number }>(() => ({ totalCount: 0 })),
-    withState<{ selectedEntity: Partial<E> | null }>(() => ({
-      selectedEntity: null,
-    })),
     withState<EntityFilterData<E, F>>(
       (
-        pagination = inject(PAGINATION_DEFAULT_CONFIG),
+        pagination = inject(providePaginationDefaultConfigToken()),
         sort = inject(provideSortingDefaultConfigToken())
       ) => ({
         pagination,
@@ -73,10 +69,15 @@ export function withDataService<
         filters,
       })
     ),
+    withState<{ entity: Partial<E> | null; totalCount: number }>(() => ({
+      entity: null,
+      totalCount: 0,
+    })),
     withCallStateService({ prop: 'entity' }),
     withCallStateService({ prop: 'entityCreate' }),
+    withNotificationService(),
     withComputed((store) => ({
-      entityFilterParams: computed(() => {
+      entityFilterParams: computed<EntityFilterData<E, F>>(() => {
         return {
           pagination: store.pagination(),
           filters: store.filters(),
@@ -86,8 +87,7 @@ export function withDataService<
     })),
     withMethods((store) => {
       const dataService = inject(dataServiceType);
-      const alertService = inject(AlertService);
-      const pagination = inject(PAGINATION_DEFAULT_CONFIG);
+      const pagination = inject(providePaginationDefaultConfigToken());
       return {
         updatePagination(pagination: Pagination): void {
           return patchState(store, { pagination });
@@ -111,20 +111,17 @@ export function withDataService<
               delay(500),
               tapResponse({
                 next: (entities) => {
-                  alertService.showNotification(
-                    'Entity created successfully!',
-                    'Success!',
-                    'success'
-                  );
+                  store.showSuccessNotification('Entity created successfully!');
 
-                  patchState(store, setLoaded('entityCreate'));
-                  patchState(store, addEntities(entities as E[]));
+                  patchState(
+                    store,
+                    addEntities(entities as E[]),
+                    setLoaded('entityCreate')
+                  );
                 },
                 error: (error) => {
-                  alertService.showNotification(
-                    `An error occured while creating the entity! ${error}`,
-                    'An error occured!',
-                    'error'
+                  store.showErrorNotification(
+                    `An error occured while creating the entity! ${error}`
                   );
 
                   patchState(
@@ -146,15 +143,19 @@ export function withDataService<
               return dataService.getByFilterAndPagination(params).pipe(
                 tapResponse({
                   next: (response) => {
-                    patchState(store, setLoaded('entity'));
-                    patchState(store, { totalCount: response.totalCount });
-                    patchState(store, setAllEntities(response.items));
+                    patchState(
+                      store,
+                      setAllEntities(response.items),
+                      {
+                        totalCount: response.totalCount,
+                      },
+                      setLoaded('entity')
+                    );
                   },
                   error: (error) => {
-                    alertService.showNotification(
-                      `An error occured while fetching entities! ${error}`,
-                      'An error occured!',
-                      'error'
+                    console.log(error);
+                    store.showErrorNotification(
+                      `An error occured while fetching entities! ${error}`
                     );
 
                     patchState(
@@ -176,7 +177,7 @@ export function withDataService<
               return dataService.getById(+id).pipe(
                 tapResponse({
                   next: (response) => {
-                    patchState(store, { selectedEntity: response[0] });
+                    patchState(store, { entity: response[0] });
                   },
                   error: console.error,
                 })
@@ -184,6 +185,9 @@ export function withDataService<
             })
           )
         ),
+        updateEntity(entity: E | null): void {
+          return patchState(store, { entity });
+        },
       };
     })
   );
