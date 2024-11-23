@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -19,14 +19,12 @@ import {
   ToStringPipe,
 } from '@nx-suite/shared/util';
 import {
-  TuiReorder,
   TuiTable,
   TuiTablePagination,
   TuiTablePaginationEvent,
 } from '@taiga-ui/addon-table';
 import { TuiLet } from '@taiga-ui/cdk';
-import { TuiButton, TuiDropdown, TuiLoader } from '@taiga-ui/core';
-import { TuiChevron } from '@taiga-ui/kit';
+import { TuiDropdown } from '@taiga-ui/core';
 import {
   TuiInputModule,
   TuiInputNumberModule,
@@ -41,7 +39,7 @@ import {
   tap,
 } from 'rxjs';
 import {
-  NxSuiteUiTableItemDirective,
+  NxSuiteUiTableContextMenuTemplateDirective,
   NxSuiteUiTableItemTemplateContext,
 } from './directives';
 
@@ -53,7 +51,9 @@ interface TableComponent<T> {
   pagination: InputSignal<Pagination>;
   sortOrder: InputSignal<Sort<T>>;
   contextMenu: InputSignal<
-    | NxSuiteUiTableItemDirective<NxSuiteUiTableItemTemplateContext<T>>
+    | NxSuiteUiTableContextMenuTemplateDirective<
+        NxSuiteUiTableItemTemplateContext<T>
+      >
     | undefined
   >;
 }
@@ -62,23 +62,16 @@ interface TableComponent<T> {
   selector: 'nx-suite-ui-table',
   standalone: true,
   imports: [
-    AsyncPipe,
     NgTemplateOutlet,
     TuiTablePagination,
     TuiLet,
-    TuiReorder,
     TuiTable,
     ToStringPipe,
     FormsModule,
-    NgForOf,
-    NgIf,
     ReactiveFormsModule,
-    TuiButton,
-    TuiChevron,
     TuiDropdown,
     TuiInputModule,
     TuiInputNumberModule,
-    TuiLoader,
     TuiTextfieldControllerModule,
   ],
   templateUrl: './table.component.html',
@@ -95,7 +88,11 @@ export class NxSuiteUiTableComponent<T extends Entity>
   public readonly pagination = input.required<Pagination>();
   public readonly sortOrder = input.required<Sort<T>>();
   public readonly contextMenu =
-    input<NxSuiteUiTableItemDirective<NxSuiteUiTableItemTemplateContext<T>>>();
+    input<
+      NxSuiteUiTableContextMenuTemplateDirective<
+        NxSuiteUiTableItemTemplateContext<T>
+      >
+    >();
 
   public onPaginationChange = output<Pagination>();
   public onSortChange = output<Sort<T>>();
