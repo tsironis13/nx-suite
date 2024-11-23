@@ -1,22 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, viewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  Injector,
+  OnInit,
+  runInInjectionContext,
+  signal,
+  viewChild,
+  WritableSignal,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
-  CATEGORIES_TABLE_COLUMNS_CONFIG,
   Category,
   CategoryStore,
+  provideCategoriesTableColumnsConfig,
 } from '@nx-suite/eshop-admin/categories/domain';
 import { HeaderNavigationStore } from '@nx-suite/eshop-admin/shared/domain';
 import {
   NxSuiteUiButtonComponent,
   NxSuiteUiLoaderComponent,
   NxSuiteUiTableComponent,
+  NxSuiteUiTableContextMenuTemplateDirective,
   NxSuiteUiTableItemContext,
   NxSuiteUiTableItemContextDirective,
-  NxSuiteUiTableItemDirective,
-  NxSuiteUiTableItemTemplateContext,
 } from '@nx-suite/shared/ui';
-import { Pagination, Sort } from '@nx-suite/shared/util';
+import { Pagination, Sort, TableColumnType } from '@nx-suite/shared/util';
+import { EshopAdminTableColumnImageTemplateDirective } from './directives/table/image-template.directive';
 
 @Component({
   standalone: true,
@@ -26,7 +35,8 @@ import { Pagination, Sort } from '@nx-suite/shared/util';
     NxSuiteUiButtonComponent,
     NxSuiteUiLoaderComponent,
     NxSuiteUiTableItemContextDirective,
-    NxSuiteUiTableItemDirective,
+    NxSuiteUiTableContextMenuTemplateDirective,
+    EshopAdminTableColumnImageTemplateDirective,
     RouterLink,
   ],
   selector: 'eshop-admin-category-list',
@@ -34,17 +44,25 @@ import { Pagination, Sort } from '@nx-suite/shared/util';
   styleUrls: ['./category-list.component.scss'],
 })
 export class EshopAdminCategoryListComponent implements OnInit {
-  protected readonly tableItemTemplate = viewChild<
-    NxSuiteUiTableItemDirective<NxSuiteUiTableItemTemplateContext<Category>>
-  >(NxSuiteUiTableItemDirective<NxSuiteUiTableItemTemplateContext<Category>>);
+  protected readonly tableContextMenuTemplate = viewChild<
+    NxSuiteUiTableContextMenuTemplateDirective<Category>
+  >(NxSuiteUiTableContextMenuTemplateDirective<Category>);
+  protected readonly tableImageColumnTemplate = viewChild<
+    EshopAdminTableColumnImageTemplateDirective<Category>
+  >(EshopAdminTableColumnImageTemplateDirective<Category>);
 
   protected readonly categoryStore = inject(CategoryStore);
-  protected readonly columnsConfig = inject(CATEGORIES_TABLE_COLUMNS_CONFIG);
   readonly #headerNavigationStore = inject(HeaderNavigationStore);
   readonly #router = inject(Router);
+  readonly #injector = inject(Injector);
+
+  protected columnsConfig: WritableSignal<TableColumnType<Category>[]> = signal(
+    []
+  );
 
   ngOnInit(): void {
     this.setTitle();
+    this.initTable();
   }
 
   public updateFilter(): void {
@@ -65,5 +83,17 @@ export class EshopAdminCategoryListComponent implements OnInit {
 
   private setTitle(): void {
     this.#headerNavigationStore.setTitle('Categories List');
+  }
+
+  private initTable(): void {
+    runInInjectionContext(this.#injector, () => {
+      this.columnsConfig.set(
+        inject(
+          provideCategoriesTableColumnsConfig(
+            this.tableImageColumnTemplate()?.templateRef
+          )
+        )
+      );
+    });
   }
 }

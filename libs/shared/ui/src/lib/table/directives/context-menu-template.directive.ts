@@ -1,9 +1,9 @@
 import { Directive, inject, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[nxSuiteUiTableItem]',
+  selector: '[nxSuiteUiTableContextMenuTemplate]',
   standalone: true,
 })
-export class NxSuiteUiTableItemDirective<T> {
+export class NxSuiteUiTableContextMenuTemplateDirective<T> {
   templateRef = inject<TemplateRef<T>>(TemplateRef<T>);
 }

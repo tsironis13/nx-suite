@@ -45,6 +45,7 @@ export const productCategoryRouter = router({
           id: productCategories.id,
           name: productCategories.name,
           description: productCategories.description,
+          imageUrl: productCategories.imageUrl,
           parentCategoryName: parent.name,
         })
         .from(productCategories)

@@ -74,7 +74,6 @@ export function withEntitiesService<
         getAllWithKeys: rxMethod<(keyof E)[]>(
           pipe(
             switchMap((params) => {
-              console.log(params);
               patchState(store, setLoading(prop));
               return dataService.getAllWithKeys(params).pipe(
                 delay(100),

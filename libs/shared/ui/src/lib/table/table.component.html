@@ -35,6 +35,15 @@
           "
         ></ng-container>
       </td>
+      } @else if (column.metaData?.type === 'template') {
+      <td *tuiCell="cField" tuiTd>
+        <ng-container
+          *ngTemplateOutlet="
+            column.template || emptyColumnTemplateRef;
+            context: { $implicit: { item } }
+          "
+        ></ng-container>
+      </td>
       } @else {
       <td *tuiCell="cField" tuiTd>
         {{ item[column.field] }}
@@ -59,3 +68,4 @@
 </table>
 
 <ng-template #emptyContextMenuRef>No Context Menu Template</ng-template>
+<ng-template #emptyColumnTemplateRef>No Template</ng-template>

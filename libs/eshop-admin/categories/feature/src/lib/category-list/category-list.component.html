@@ -16,19 +16,19 @@
   >
     <nx-suite-ui-table
       [size]="'l'"
-      [columns]="columnsConfig"
+      [columns]="columnsConfig()"
       [totalCount]="categoryStore.totalCount()"
       [data]="categoryStore.entities()"
       [pagination]="categoryStore.pagination()"
       [sortOrder]="categoryStore.sort()"
-      [contextMenu]="tableItemTemplate()"
+      [contextMenu]="tableContextMenuTemplate()"
       (onPaginationChange)="onPaginationChange($event)"
       (onSortChange)="onSortChange($event)"
     />
   </nx-suite-ui-loader>
 </div>
 <ng-template
-  nxSuiteUiTableItem
+  nxSuiteUiTableContextMenuTemplate
   [item]="categoryStore.entities()[0]"
   nxSuiteUiTableItemContext
   let-context
@@ -39,4 +39,15 @@
     (onClick)="editCategory(context)"
     >edit</nx-suite-ui-button
   >
+</ng-template>
+
+<ng-template
+  eshopAdminTableColumnImageTemplate
+  [item]="categoryStore.entities()[0]"
+  nxSuiteUiTableItemContext
+  let-context
+>
+  @if(context.item.imageUrl) {
+  <img src="{{ context.item.imageUrl }}" alt="image" />
+  }
 </ng-template>

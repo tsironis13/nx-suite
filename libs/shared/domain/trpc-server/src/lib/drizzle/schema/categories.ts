@@ -14,6 +14,7 @@ export const productCategories = pgTable(
     id: bigserial('id', { mode: 'number' }).primaryKey(),
     name: text('name'),
     description: text('description'),
+    imageUrl: text('image_url'),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at'),
     deletedAt: timestamp('deleted_at'),
