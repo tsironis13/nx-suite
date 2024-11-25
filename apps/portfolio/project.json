@@ -1,0 +1,55 @@
+{
+  "name": "portfolio",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@analogjs/platform:vite",
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
+      },
+      "outputs": [
+        "{options.outputPath}",
+        "{workspaceRoot}/dist/apps/portfolio/.nitro",
+        "{workspaceRoot}/dist/apps/portfolio/ssr",
+        "{workspaceRoot}/dist/apps/portfolio/analog"
+      ],
+      "options": {
+        "main": "apps/portfolio/src/main.ts",
+        "configFile": "apps/portfolio/vite.config.ts",
+        "outputPath": "dist/apps/portfolio/client",
+        "tsConfig": "apps/portfolio/tsconfig.app.json"
+      }
+    },
+    "serve": {
+      "executor": "@analogjs/platform:vite-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "portfolio:build",
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "portfolio:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "portfolio:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@analogjs/vitest-angular:test",
+      "outputs": ["{projectRoot}/coverage"]
+    }
+  },
+  "tags": ["scope:portfolio"],
+  "sourceRoot": "apps/portfolio/src"
+}

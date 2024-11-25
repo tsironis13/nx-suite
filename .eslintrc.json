@@ -28,6 +28,10 @@
                 "onlyDependOnLibsWithTags": ["scope:analog-app", "scope:shared"]
               },
               {
+                "sourceTag": "scope:portfolio",
+                "onlyDependOnLibsWithTags": ["scope:portfolio", "scope:shared"]
+              },
+              {
                 "sourceTag": "domain:eshop-admin:products",
                 "onlyDependOnLibsWithTags": [
                   "domain:eshop-admin:products",

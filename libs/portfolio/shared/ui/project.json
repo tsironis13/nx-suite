@@ -1,23 +1,23 @@
 {
-  "name": "eshop-admin-shared-ui",
+  "name": "portfolio-shared-ui",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/eshop-admin/shared/ui/src",
-  "prefix": "eshop-admin",
+  "sourceRoot": "libs/portfolio/shared/ui/src",
+  "prefix": "portfolio",
   "projectType": "library",
-  "tags": ["scope:eshop-admin", "scope:shared", "type:ui"],
+  "tags": ["scope:portfolio", "scope:shared", "type:ui"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/eshop-admin/shared/ui/ng-package.json"
+        "project": "libs/portfolio/shared/ui/ng-package.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "libs/eshop-admin/shared/ui/tsconfig.lib.prod.json"
+          "tsConfig": "libs/portfolio/shared/ui/tsconfig.lib.prod.json"
         },
         "development": {
-          "tsConfig": "libs/eshop-admin/shared/ui/tsconfig.lib.json"
+          "tsConfig": "libs/portfolio/shared/ui/tsconfig.lib.json"
         }
       },
       "defaultConfiguration": "production"
@@ -26,7 +26,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/eshop-admin/shared/ui/jest.config.ts"
+        "jestConfig": "libs/portfolio/shared/ui/jest.config.ts"
       }
     },
     "lint": {

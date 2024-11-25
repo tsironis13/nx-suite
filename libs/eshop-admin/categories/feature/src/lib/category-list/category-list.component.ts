@@ -23,6 +23,7 @@ import {
   NxSuiteUiTableContextMenuTemplateDirective,
   NxSuiteUiTableItemContext,
   NxSuiteUiTableItemContextDirective,
+  NxSuiteUiTableItemTemplateContext,
 } from '@nx-suite/shared/ui';
 import { Pagination, Sort, TableColumnType } from '@nx-suite/shared/util';
 import { EshopAdminTableColumnImageTemplateDirective } from './directives/table/image-template.directive';
@@ -45,7 +46,9 @@ import { EshopAdminTableColumnImageTemplateDirective } from './directives/table/
 })
 export class EshopAdminCategoryListComponent implements OnInit {
   protected readonly tableContextMenuTemplate = viewChild<
-    NxSuiteUiTableContextMenuTemplateDirective<Category>
+    NxSuiteUiTableContextMenuTemplateDirective<
+      NxSuiteUiTableItemTemplateContext<Category>
+    >
   >(NxSuiteUiTableContextMenuTemplateDirective<Category>);
   protected readonly tableImageColumnTemplate = viewChild<
     EshopAdminTableColumnImageTemplateDirective<Category>

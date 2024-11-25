@@ -52,7 +52,9 @@
         "libs/shared/domain/trpc-server/src/index.ts"
       ],
       "@nx-suite/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"]
+      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"],
+      "@nx-suite/portfolio/shell": ["libs/portfolio/shell/src/index.ts"],
+      "@nx-suite/portfolio/shared/ui": ["libs/portfolio/shared/ui/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true
   },
