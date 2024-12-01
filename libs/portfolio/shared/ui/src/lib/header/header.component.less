@@ -1,0 +1,49 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.header-wrapper {
+  height: 86px;
+  z-index: 999;
+  transition: 0.2s;
+
+  &.sticky {
+    &:extend(.sticky);
+    height: 75px;
+    z-index: 999999;
+    background: white;
+    box-shadow: 0 8px 4px -7px rgba(115, 115, 115, 0.3);
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    align-items: center !important;
+
+    .navigation-toggler {
+      --t-icon-end: url(assets/taiga-ui/icons/menu.svg) !important;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-wrapper {
+    height: 136px;
+
+    .desktop {
+      display: flex;
+      align-items: center !important;
+    }
+
+    .mobile {
+      display: none;
+    }
+  }
+}

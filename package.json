@@ -33,6 +33,7 @@
     "@taiga-ui/kit": "^4.10.0",
     "@taiga-ui/layout": "^4.10.0",
     "@taiga-ui/legacy": "^4.10.0",
+    "@taiga-ui/styles": "^4.16.0",
     "@trpc/client": "^10.25.0",
     "@trpc/server": "^10.25.0",
     "drizzle-orm": "^0.33.0",

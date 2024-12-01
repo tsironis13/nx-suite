@@ -1,0 +1,48 @@
+<div class="container" style="padding: 62px 0">
+  <div
+    class="text-center"
+    style="
+      color: #7ad3ab;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 6px;
+      padding: 10px 0;
+    "
+  >
+    Portfolio
+  </div>
+  <div class="text-center tui-text_h5" style="margin-bottom: 30px">
+    My Works
+  </div>
+  <tui-tabs
+    [(activeItemIndex)]="activeTabIndex"
+    style="
+      display: flex;
+      justify-content: center;
+      box-shadow: none;
+      margin-bottom: 25px;
+    "
+  >
+    <button class="!ml-2 sm:!ml-6" tuiTab type="button">All</button>
+    <button class="!ml-2 sm:!ml-6" tuiTab type="button">Web Development</button>
+    <button class="!ml-2 sm:!ml-6" tuiTab type="button">
+      Open Source Contributions
+    </button>
+  </tui-tabs>
+
+  <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    @for (item of activeProjects(); track $index) {
+    <div>
+      <nx-suite-ui-hoverable-card
+        style="margin-bottom: 20px; display: block"
+        [height]="item.height"
+        [imageUrl]="item.imageUrl"
+        [details]="item.details"
+        [backgroundHoverColor]="item.backgroundHoverColor"
+        [title]="item.title"
+        [subtitle]="item.subtitle"
+      ></nx-suite-ui-hoverable-card>
+    </div>
+    }
+  </div>
+</div>

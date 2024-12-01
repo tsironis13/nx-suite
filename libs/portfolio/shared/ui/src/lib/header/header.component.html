@@ -1,1 +1,75 @@
-<p>portfolio header works!</p>
+<div
+  class="header-wrapper absolute w-full top-0"
+  [ngClass]="{ sticky: stickyHeader() }"
+>
+  <div class="container flex flex-col h-full justify-center">
+    <div tuiHeader class="desktop">
+      <img
+        ngSrc="./assets/images/logo.png"
+        width="80"
+        height="40"
+        priority
+        alt="logo"
+      />
+      <div class="ml-2" tuiTitle>ITsironis</div>
+
+      <div tuiAccessories>
+        <ul>
+          <li class="float-left">Home</li>
+          <li class="float-left" style="margin-left: 35px">Home 2</li>
+          <li class="float-left" style="margin-left: 35px">Home 3</li>
+          <li class="float-left" style="margin-left: 35px">Home 4</li>
+        </ul>
+      </div>
+    </div>
+
+    <div tuiHeader class="mobile">
+      <img
+        ngSrc="./assets/images/logo.png"
+        width="80"
+        height="40"
+        priority
+        alt="logo"
+      />
+      <div class="ml-2" tuiTitle>ITsironis</div>
+
+      <div tuiAccessories>
+        <button
+          tuiIconButton
+          tuiNavigationDrawer
+          type="button"
+          class="navigation-toggler"
+          [(open)]="open"
+        >
+          <tui-data-list>
+            <tui-opt-group
+              *ngFor="let group of drawer | keyvalue"
+              [label]="group.key"
+            >
+              <button
+                *ngFor="let item of group.value"
+                tuiOption
+                type="button"
+                (click)="open = false"
+              >
+                <img alt="icon" [src]="item.icon" />
+                {{ item.name }}
+              </button>
+            </tui-opt-group>
+            <tui-opt-group>
+              <label tuiOption>
+                <input
+                  size="s"
+                  tuiSwitch
+                  type="checkbox"
+                  [(ngModel)]="switch"
+                />
+                Dark mode
+              </label>
+            </tui-opt-group>
+          </tui-data-list>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
