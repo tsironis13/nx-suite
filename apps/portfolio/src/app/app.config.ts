@@ -14,6 +14,7 @@ import {
 } from '@angular/platform-browser';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 import { provideTrpcClient } from '../trpc-client';
 
@@ -26,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([requestContextInterceptor])
     ),
-
+    provideRouter([], withInMemoryScrolling({ anchorScrolling: 'enabled' })),
     provideTrpcClient(),
     provideAnimations(),
     NG_EVENT_PLUGINS,

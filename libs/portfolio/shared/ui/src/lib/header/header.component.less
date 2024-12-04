@@ -12,6 +12,18 @@
   z-index: 999;
   transition: 0.2s;
 
+  .menu {
+    button {
+      &:hover {
+        background: transparent;
+        color: #7ad3ab;
+      }
+      &.active {
+        color: #7ad3ab;
+      }
+    }
+  }
+
   &.sticky {
     &:extend(.sticky);
     height: 75px;

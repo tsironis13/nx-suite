@@ -23,6 +23,10 @@ module.exports = {
       },
       transitionDuration: {
         600: '600ms',
+        900: '900ms',
+      },
+      rotate: {
+        360: '360deg',
       },
       colors: {
         'regal-blue': '#243c5a',

@@ -1,21 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TuiRepeatTimes } from '@taiga-ui/cdk';
-import {
-  TuiDataList,
-  TuiDropdown,
-  TuiDropdownService,
-  TuiIcon,
-  TuiIcons,
-} from '@taiga-ui/core';
-import {
-  TuiAvatar,
-  TuiBadge,
-  TuiBadgeNotification,
-  TuiDataListDropdownManager,
-  TuiTabs,
-} from '@taiga-ui/kit';
+import { TuiDropdownService, TuiIcon, TuiIcons } from '@taiga-ui/core';
+import { TuiBadge } from '@taiga-ui/kit';
 import { TuiAsideComponent, TuiNavigation } from '@taiga-ui/layout';
 
 const ICON =
@@ -24,15 +9,10 @@ const ICON =
 @Component({
   selector: 'eshop-admin-header',
   standalone: true,
-  imports: [           
-    TuiNavigation,
-    TuiIcon,
-    TuiBadge    
-  ],
+  imports: [TuiNavigation, TuiIcon, TuiBadge],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   providers: [TuiDropdownService, TuiAsideComponent, TuiIcons],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EshopAdminHeaderComponent {  
-}
+export class EshopAdminHeaderComponent {}

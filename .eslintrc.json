@@ -17,6 +17,10 @@
                 "onlyDependOnLibsWithTags": ["scope:shared"]
               },
               {
+                "sourceTag": "scope:project-shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
                 "sourceTag": "scope:eshop-admin",
                 "onlyDependOnLibsWithTags": [
                   "scope:eshop-admin",

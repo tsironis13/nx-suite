@@ -1,6 +1,6 @@
 <div
   class="header-wrapper absolute w-full top-0"
-  [ngClass]="{ sticky: stickyHeader() }"
+  [ngClass]="{ sticky: headerNavigationService.isHeaderSticky() }"
 >
   <div class="container flex flex-col h-full justify-center">
     <div tuiHeader class="desktop">
@@ -14,11 +14,27 @@
       <div class="ml-2" tuiTitle>ITsironis</div>
 
       <div tuiAccessories>
-        <ul>
-          <li class="float-left">Home</li>
-          <li class="float-left" style="margin-left: 35px">Home 2</li>
-          <li class="float-left" style="margin-left: 35px">Home 3</li>
-          <li class="float-left" style="margin-left: 35px">Home 4</li>
+        <ul class="menu">
+          @for (item of headerNavigationService.menuItems(); track $index) {
+          <button
+            appearance="flat"
+            size="l"
+            tuiButton
+            type="button"
+            class="float-left"
+            [class.active]="
+              headerNavigationService.getActiveMenuItem()?.id === item.id
+            "
+            (click)="
+              headerNavigationService.scrollToAnchorById(
+                item.id,
+                item.scrollOffset
+              )
+            "
+          >
+            {{ item.title }}
+          </button>
+          }
         </ul>
       </div>
     </div>

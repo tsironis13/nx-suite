@@ -21,7 +21,6 @@
       "@nx-suite/analog-app/profile/feature-profile-list": [
         "libs/analog-app/profile/feature-profile-list/src/index.ts"
       ],
-      "@nx-suite/domain": ["libs/eshop-admin/shared/domain/src/index.ts"],
       "@nx-suite/eshop-admin/categories/domain": [
         "libs/eshop-admin/categories/domain/src/index.ts"
       ],
@@ -44,6 +43,13 @@
         "libs/eshop-admin/shared/util/src/index.ts"
       ],
       "@nx-suite/eshop-admin/shell": ["libs/eshop-admin/shell/src/index.ts"],
+      "@nx-suite/portfolio/shared/domain": [
+        "libs/portfolio/shared/domain/src/index.ts"
+      ],
+      "@nx-suite/portfolio/shared/ui": [
+        "libs/portfolio/shared/ui/src/index.ts"
+      ],
+      "@nx-suite/portfolio/shell": ["libs/portfolio/shell/src/index.ts"],
       "@nx-suite/shared/domain": ["libs/shared/domain/index.ts"],
       "@nx-suite/shared/domain/trpc-client": [
         "libs/shared/domain/trpc-client/src/index.ts"
@@ -52,9 +58,7 @@
         "libs/shared/domain/trpc-server/src/index.ts"
       ],
       "@nx-suite/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"],
-      "@nx-suite/portfolio/shell": ["libs/portfolio/shell/src/index.ts"],
-      "@nx-suite/portfolio/shared/ui": ["libs/portfolio/shared/ui/src/index.ts"]
+      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true
   },

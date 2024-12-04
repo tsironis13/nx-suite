@@ -1,0 +1,8 @@
+.icon {
+  transition: 0.9s;
+  transform: rotateY(0deg);
+
+  &:hover {
+    transform: rotateY(360deg);
+  }
+}

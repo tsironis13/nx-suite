@@ -8,6 +8,22 @@
       priority
       class="object-cover rounded-xl md:rounded-none lg:rounded-bl-xl"
     />
+    <div
+      style="
+        position: absolute;
+        top: 50%;
+        right: 0;
+        padding-right: 35px;
+        z-index: 9999;
+        transform: translateY(-50%) !important;
+      "
+    >
+      <nx-suite-ui-social-networks
+        [orientation]="'vertical'"
+        [items]="socialNetworkItems()"
+        [transparentBackground]="true"
+      ></nx-suite-ui-social-networks>
+    </div>
   </div>
   <div class="container grid grid-cols-1 lg:hidden text-center details">
     <h1 class="tui-text_h1 title">Ioannis Tsironis</h1>

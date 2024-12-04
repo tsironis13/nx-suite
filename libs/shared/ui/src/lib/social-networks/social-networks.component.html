@@ -1,0 +1,23 @@
+<div class="grid grid-cols-1">
+  <ng-content />
+  <div
+    class="flex gap-3 flex-row"
+    [class.flex-col]="orientation() === 'vertical'"
+  >
+    @for (item of items(); track $index) {
+    <a
+      [href]="item.link"
+      target="_blank"
+      iconStart="{{ item.icon ?? '' }}"
+      tuiLink
+      [style.--tui-icon-size.rem]="1.5"
+      class="w-12 h-12 flex justify-center items-center !text-white rounded-full before:!me-0 icon"
+      [style.background]="item.background"
+    >
+      @if (item.customImage) {
+      <img src="{{ item.customImage.url }}" alt="{{ item.customImage.alt }}" />
+      }
+    </a>
+    }
+  </div>
+</div>

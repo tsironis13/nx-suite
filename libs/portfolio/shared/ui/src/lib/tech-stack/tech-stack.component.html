@@ -1,0 +1,39 @@
+<div style="background: #f0f9fa; padding: 62px 0 72px">
+  <div class="container">
+    <div
+      class="text-center"
+      style="
+        color: #7ad3ab;
+        font-weight: 700;
+        font-size: 20px;
+        margin-bottom: 6px;
+        padding: 10px 0;
+      "
+    >
+      Tech Stack
+    </div>
+    <div class="text-center tui-text_h5" style="margin-bottom: 62px">
+      Languages and technologies
+    </div>
+    <div class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+      @for (st of stack(); track $index) {
+      <div tuiAppearance="floating" tuiCardLarge>
+        <header tuiHeader>
+          <h1 tuiTitle>
+            {{ st.title }}
+            <span tuiSubtitle style="min-height: 24px">{{ st.subtitle }}</span>
+          </h1>
+        </header>
+        @for (item of st.items; track $index) {
+        <div tuiCell="l">
+          <tui-avatar appearance="primary" src="@tui.star" />
+          <div tuiTitle>
+            {{ item }}
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

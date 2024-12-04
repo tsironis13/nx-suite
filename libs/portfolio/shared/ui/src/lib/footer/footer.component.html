@@ -1,0 +1,43 @@
+<div class="container" style="padding-top: 85px; padding-bottom: 30px">
+  <div class="grid grid-cols-1 lg:grid-cols-2">
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      <div>
+        <div class="flex items-center mb-3">
+          <img
+            ngSrc="./assets/images/logo.png"
+            width="80"
+            height="40"
+            alt="logo"
+          />
+          <div class="ml-2 tui-text_h5">ITsironis</div>
+        </div>
+        <div class="tui-text_body-m">
+          All rights reserved
+          <span style="font-weight: 700">IoannisTsironis</span> © 2025
+        </div>
+      </div>
+      <div class="tui-text_body-m my-4">
+        <div class="pb-3" style="font-weight: 700">Reach me</div>
+        <div>
+          <a
+            href="mailto:gtsironis8@gmail.com"
+            [innerText]="'gtsironis8@gmail.com'"
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div class="flex lg:justify-end">
+      <nx-suite-ui-social-networks
+        [orientation]="'horizontal'"
+        [items]="socialNetworkItems()"
+      >
+        <div
+          class="tui-text_body-m"
+          style="padding: 8px 0 25px; font-weight: 700"
+        >
+          Follow Me
+        </div>
+      </nx-suite-ui-social-networks>
+    </div>
+  </div>
+</div>

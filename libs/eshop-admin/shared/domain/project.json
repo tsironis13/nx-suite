@@ -1,10 +1,10 @@
 {
-  "name": "domain",
+  "name": "eshop-admin-shared-domain",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/eshop-admin/shared/domain/src",
   "prefix": "eshop-admin",
   "projectType": "library",
-  "tags": ["scope:eshop-admin", "scope:shared", "type:domain-logic"],
+  "tags": ["scope:eshop-admin", "scope:project-shared", "type:domain-logic"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",

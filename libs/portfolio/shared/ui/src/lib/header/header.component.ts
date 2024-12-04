@@ -9,9 +9,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
-  signal,
+  inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HeaderNavigationStore } from '@nx-suite/portfolio/shared/domain';
 import { TuiButton, TuiDataList } from '@taiga-ui/core';
 import { TuiHeader, TuiNavigation } from '@taiga-ui/layout';
 const ICON =
@@ -36,7 +37,6 @@ const ICON =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioHeaderComponent {
-  stickyHeader = signal(false);
   protected open = false;
   protected switch = false;
   protected readonly drawer = {
@@ -52,16 +52,14 @@ export class PortfolioHeaderComponent {
     ],
   };
 
+  protected readonly headerNavigationService = inject(HeaderNavigationStore);
+
   @HostListener('document:scroll', ['$event'])
   public onViewportScroll() {
-    this.enableStickyHeader();
+    this.headerNavigationService.enableStickyHeader();
   }
 
   constructor() {
-    afterNextRender(() => this.enableStickyHeader());
-  }
-
-  private enableStickyHeader() {
-    this.stickyHeader.set(window.scrollY > 0);
+    afterNextRender(() => this.headerNavigationService.enableStickyHeader());
   }
 }

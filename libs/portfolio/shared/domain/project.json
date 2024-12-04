@@ -1,0 +1,36 @@
+{
+  "name": "portfolio-shared-domain",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portfolio/shared/domain/src",
+  "prefix": "portfolio",
+  "projectType": "library",
+  "tags": ["scope:portfolio", "scope:shared", "type:domain-logic"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/portfolio/shared/domain/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/portfolio/shared/domain/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/portfolio/shared/domain/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/portfolio/shared/domain/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

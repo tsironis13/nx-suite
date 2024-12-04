@@ -5,12 +5,13 @@ import {
   signal,
 } from '@angular/core';
 import { NxSuiteUiHovarableCardComponent } from '@nx-suite/shared/ui';
+import { TuiIcon } from '@taiga-ui/core';
 import { TuiTabs } from '@taiga-ui/kit';
 
 @Component({
   selector: 'portfolio-projects',
   standalone: true,
-  imports: [NxSuiteUiHovarableCardComponent, TuiTabs],
+  imports: [NxSuiteUiHovarableCardComponent, TuiTabs, TuiIcon],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
