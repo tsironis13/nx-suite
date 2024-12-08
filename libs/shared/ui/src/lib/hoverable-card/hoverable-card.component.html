@@ -3,7 +3,7 @@
   <img ngSrc="{{ imageUrl() }}" fill class="rounded-xl" />
   } @if (details()) {
   <div
-    class="details-content absolute w-10 h-10 right-7 -top-2.5 bg-white duration-600 rounded-full invisible cursor-pointer opacity-0 z-99999"
+    class="details-content absolute w-10 h-10 right-7 -top-2.5 bg-white duration-600 rounded-full invisible cursor-pointer opacity-0"
   >
     <a
       href="{{ details()?.link }}"
@@ -15,7 +15,7 @@
   </div>
   }
   <div
-    class="over-content-footer font-bold z-99999 opacity-0 duration-600 text-white -bottom-7 absolute"
+    class="over-content-footer font-bold opacity-0 duration-600 text-white -bottom-7 absolute"
   >
     <div class="mb-2 text-lg">{{ title() }}</div>
     <div class="text-sm">{{ subtitle() }}</div>

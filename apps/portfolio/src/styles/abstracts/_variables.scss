@@ -1,4 +1,10 @@
+//z-index
+$base: 0;
+$above: 10;
+$below: -1;
+
 :root {
+  //colors
   --tui-background-accent-1: #204b57;
   --tui-background-accent-2: #125e8a;
   --tui-background-neutral-1: #c2b8b2;
@@ -8,8 +14,8 @@
   --tui-text-action-hover: #197bbd;
   --tui-background-accent-1-hover: #125e8a;
 
-  //secondary #7ad3ab
-  //accent #197BBD
-  //alt1 #C2B8B2
-  //alt2 #8A716A
+  //z-index
+  --toolbar: #{$above + $base}; //z-index: 10
+  --hoverable-card-overlay: #{$above + $base + $below}; //z-index: toolbar - 1 => 9
+  --background-below: #{$below}; //z-index: -1
 }

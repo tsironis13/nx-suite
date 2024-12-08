@@ -1,17 +1,13 @@
 .container {
   position: relative;
   margin: 0 auto;
-  width: 75% !important;
-}
-
-.ng-trigger-tuiSlideInLeft {
-  top: 0 !important;
+  padding: 0 15px;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
   .container {
     max-width: 730px !important;
-    width: auto !important;
   }
 }
 

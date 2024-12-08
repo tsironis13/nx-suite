@@ -18,9 +18,6 @@ module.exports = {
         '4xl': '2.441rem',
         '5xl': '3.052rem',
       },
-      zIndex: {
-        99999: '99999',
-      },
       transitionDuration: {
         600: '600ms',
         900: '900ms',

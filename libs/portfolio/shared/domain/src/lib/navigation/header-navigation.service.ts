@@ -13,7 +13,6 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { filter, Observable, of, pipe, switchMap, tap } from 'rxjs';
 
 type ScrollingState = {
-  currentPageOffset: number;
   scrollingInProgress: boolean;
   componentsOffsetTopOffsetHeightBoundaries: ComponentOffsetTop;
 };
@@ -39,7 +38,6 @@ const menuItems: MenuItem[] = [
 ];
 
 const scrollingState: ScrollingState = {
-  currentPageOffset: 0,
   scrollingInProgress: false,
   componentsOffsetTopOffsetHeightBoundaries: {
     home: [0, 0],

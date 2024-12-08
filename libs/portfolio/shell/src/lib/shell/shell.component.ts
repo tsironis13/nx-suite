@@ -1,11 +1,10 @@
 import {
   afterNextRender,
-  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
   inject,
-  OnInit,
+  signal,
   viewChild,
 } from '@angular/core';
 import { HeaderNavigationStore } from '@nx-suite/portfolio/shared/domain';
@@ -22,7 +21,7 @@ import {
   PortfolioSkillsComponent,
   PortfolioTechStackComponent,
 } from '@nx-suite/portfolio/shared/ui';
-import { TuiScrollService } from '@taiga-ui/cdk';
+import { NxSuiteUiScrollTopComponent } from '@nx-suite/shared/ui';
 
 @Component({
   selector: 'portfolio-shell',
@@ -39,13 +38,13 @@ import { TuiScrollService } from '@taiga-ui/cdk';
     PortfolioSkillsComponent,
     PortfolioTechStackComponent,
     PortfolioFooterComponent,
+    NxSuiteUiScrollTopComponent,
   ],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
 })
-export class ShellComponent implements OnInit, AfterViewInit {
-  readonly #tuiScrollService = inject(TuiScrollService);
-
+export class ShellComponent {
+  protected readonly isScrollTopVisible = signal(false);
   home = viewChild<PortfolioHomeComponent, ElementRef>(PortfolioHomeComponent, {
     read: ElementRef,
   });
@@ -66,47 +65,44 @@ export class ShellComponent implements OnInit, AfterViewInit {
     { read: ElementRef }
   );
 
-  @HostListener('document:scroll', ['$event'])
-  public onViewportScroll() {
-    this.headerNavigationService.updateActiveItemOnPageScroll(scrollY);
-  }
-
   protected readonly headerNavigationService = inject(HeaderNavigationStore);
 
   constructor() {
-    afterNextRender(() => {
-      this.headerNavigationService.updateComponentOffsetTop('home', [
-        this.home()?.nativeElement.offsetTop,
-        this.home()?.nativeElement.offsetHeight,
-      ]);
-      this.headerNavigationService.updateComponentOffsetTop('about', [
-        this.about()?.nativeElement.offsetTop,
-        this.about()?.nativeElement.offsetHeight,
-      ]);
-      this.headerNavigationService.updateComponentOffsetTop('projects', [
-        this.projects()?.nativeElement.offsetTop,
-        this.projects()?.nativeElement.offsetHeight,
-      ]);
-      this.headerNavigationService.updateComponentOffsetTop('experience', [
-        this.experience()?.nativeElement.offsetTop,
-        this.experience()?.nativeElement.offsetHeight,
-      ]);
-      this.headerNavigationService.updateComponentOffsetTop('techStack', [
-        this.techStack()?.nativeElement.offsetTop,
-        this.techStack()?.nativeElement.offsetHeight,
-      ]);
-
-      this.headerNavigationService.updateActiveItemOnPageScroll(scrollY);
-    });
+    afterNextRender(() => this.updateComponentsOffsetTop());
   }
 
-  ngOnInit(): void {
-    this.#tuiScrollService.scroll$;
+  @HostListener('document:scroll', ['$event'])
+  public onViewportScroll() {
+    this.headerNavigationService.updateActiveItemOnPageScroll(scrollY);
+    this.toggleScrollTop();
   }
 
-  ngAfterViewInit(): void {
-    console.log;
-    //console.log(this.skills?.nativeElement);
-    //console.log(this.projects?.scrollTop);
+  private updateComponentsOffsetTop(): void {
+    this.headerNavigationService.updateComponentOffsetTop('home', [
+      this.home()?.nativeElement.offsetTop,
+      this.home()?.nativeElement.offsetHeight,
+    ]);
+    this.headerNavigationService.updateComponentOffsetTop('about', [
+      this.about()?.nativeElement.offsetTop,
+      this.about()?.nativeElement.offsetHeight,
+    ]);
+    this.headerNavigationService.updateComponentOffsetTop('projects', [
+      this.projects()?.nativeElement.offsetTop,
+      this.projects()?.nativeElement.offsetHeight,
+    ]);
+    this.headerNavigationService.updateComponentOffsetTop('experience', [
+      this.experience()?.nativeElement.offsetTop,
+      this.experience()?.nativeElement.offsetHeight,
+    ]);
+    this.headerNavigationService.updateComponentOffsetTop('techStack', [
+      this.techStack()?.nativeElement.offsetTop,
+      this.techStack()?.nativeElement.offsetHeight,
+    ]);
+
+    this.headerNavigationService.updateActiveItemOnPageScroll(scrollY);
+  }
+
+  private toggleScrollTop(): void {
+    this.isScrollTopVisible.set(scrollY > 500);
   }
 }

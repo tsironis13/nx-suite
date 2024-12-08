@@ -1,18 +1,12 @@
 <div
   class="header-wrapper absolute w-full top-0"
-  [ngClass]="{ sticky: headerNavigationService.isHeaderSticky() }"
+  [ngClass]="{
+    sticky: headerNavigationService.isHeaderSticky()
+  }"
 >
   <div class="container flex flex-col h-full justify-center">
     <div tuiHeader class="desktop">
-      <img
-        ngSrc="./assets/images/logo.png"
-        width="80"
-        height="40"
-        priority
-        alt="logo"
-      />
-      <div class="ml-2" tuiTitle>ITsironis</div>
-
+      <ng-container [ngTemplateOutlet]="headerLogo"> </ng-container>
       <div tuiAccessories>
         <ul class="menu">
           @for (item of headerNavigationService.menuItems(); track $index) {
@@ -21,7 +15,7 @@
             size="l"
             tuiButton
             type="button"
-            class="float-left"
+            class="item float-left"
             [class.active]="
               headerNavigationService.getActiveMenuItem()?.id === item.id
             "
@@ -40,14 +34,7 @@
     </div>
 
     <div tuiHeader class="mobile">
-      <img
-        ngSrc="./assets/images/logo.png"
-        width="80"
-        height="40"
-        priority
-        alt="logo"
-      />
-      <div class="ml-2" tuiTitle>ITsironis</div>
+      <ng-container [ngTemplateOutlet]="headerLogo"> </ng-container>
 
       <div tuiAccessories>
         <button
@@ -55,37 +42,52 @@
           tuiNavigationDrawer
           type="button"
           class="navigation-toggler"
-          [(open)]="open"
         >
-          <tui-data-list>
-            <tui-opt-group
-              *ngFor="let group of drawer | keyvalue"
-              [label]="group.key"
+          <div class="flex flex-col sidebar-menu tui-text_body-m">
+            @for (item of headerNavigationService.menuItems(); track $index) {
+
+            <a
+              tuiLink
+              [class.active]="
+                headerNavigationService.getActiveMenuItem()?.id === item.id
+              "
+              class="item mb-3 !text-white"
+              (click)="
+                headerNavigationService.scrollToAnchorById(
+                  item.id,
+                  item.scrollOffset
+                )
+              "
             >
-              <button
-                *ngFor="let item of group.value"
-                tuiOption
-                type="button"
-                (click)="open = false"
+              {{ item.title }}
+            </a>
+            }
+            <nx-suite-ui-social-networks
+              [orientation]="'horizontal'"
+              class="block mt-4"
+              [items]="socialNetworkItems()"
+            >
+              <div
+                class="tui-text_body-m"
+                style="padding: 8px 0 25px; font-weight: 700"
               >
-                <img alt="icon" [src]="item.icon" />
-                {{ item.name }}
-              </button>
-            </tui-opt-group>
-            <tui-opt-group>
-              <label tuiOption>
-                <input
-                  size="s"
-                  tuiSwitch
-                  type="checkbox"
-                  [(ngModel)]="switch"
-                />
-                Dark mode
-              </label>
-            </tui-opt-group>
-          </tui-data-list>
+                Follow Me
+              </div>
+            </nx-suite-ui-social-networks>
+          </div>
         </button>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #headerLogo>
+  <img
+    ngSrc="./assets/images/logo.png"
+    width="80"
+    height="40"
+    priority
+    alt="logo"
+  />
+  <div class="ml-2" tuiTitle>ITsironis</div>
+</ng-template>
