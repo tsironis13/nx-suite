@@ -35,48 +35,61 @@
       About me
     </div>
     <div class="tui-text_h5" style="margin-bottom: 30px">
-      I Develop System that Works
+      {{ profile().about.title }}
     </div>
     <div style="margin-bottom: 25px" class="tui-text_body-m">
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-      dese runt mollit anim id est laborum.
+      {{ profile().about.content[0] }}
     </div>
     <div style="margin-bottom: 16px" class="tui-text_body-m">
-      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-      doloremque laudantium, totam rem aperia m, eaque ipsa quae ab illo inven
-      tore veritatis et quasi architecto beatae vitae.
+      {{ profile().about.content[1] }}
+    </div>
+    <div class="tui-text_body-m" style="margin-bottom: 16px">
+      {{ profile().about.content[2] }}
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2">
       <div>
         <div class="grid grid-cols-2" style="margin-bottom: 8px">
           <div class="tui-text_h6" style="font-size: 16px">Name</div>
-          <div class="tui-text_body-m">Ioannis Tsironis</div>
+          <div class="tui-text_body-m">{{ profile().about.details.name }}</div>
         </div>
         <div class="grid grid-cols-2" style="margin-bottom: 8px">
           <div class="tui-text_h6" style="font-size: 16px">Age</div>
-          <div class="tui-text_body-m">34</div>
+          <div class="tui-text_body-m">{{ profile().about.details.age }}</div>
         </div>
         <div class="grid grid-cols-2" style="margin-bottom: 8px">
           <div class="tui-text_h6" style="font-size: 16px">Occupation</div>
-          <div class="tui-text_body-m">Software Engineer</div>
+          <div class="tui-text_body-m">
+            {{ profile().about.details.occupation }}
+          </div>
         </div>
         <div class="grid grid-cols-2" style="margin-bottom: 8px">
           <div class="tui-text_h6" style="font-size: 16px">Education</div>
-          <div class="tui-text_body-m">PhD in Physics</div>
+          <div class="tui-text_body-m">
+            {{ profile().about.details.education }}
+          </div>
         </div>
       </div>
       <div>
         <div class="grid grid-cols-2" style="margin-bottom: 8px">
           <div class="tui-text_h6" style="font-size: 16px">Phone</div>
-          <div class="tui-text_body-m">+39 3737 387381</div>
+          <div class="tui-text_body-m">{{ profile().about.details.phone }}</div>
         </div>
         <div class="grid grid-cols-2" style="margin-bottom: 8px">
           <div class="tui-text_h6" style="font-size: 16px">Email</div>
-          <div class="tui-text_body-m">'testhotmail.com'</div>
+          <div class="tui-text_body-m">{{ profile().about.details.email }}</div>
         </div>
         <div class="grid grid-cols-2" style="margin-bottom: 8px">
           <div class="tui-text_h6" style="font-size: 16px">Nationality</div>
-          <div class="tui-text_body-m">Greek</div>
+          <div class="tui-text_body-m">
+            {{ profile().about.details.nationality }}
+          </div>
+        </div>
+        <div class="grid grid-cols-2" style="margin-bottom: 8px">
+          <div class="tui-text_h6" style="font-size: 16px">Languages</div>
+          <div
+            class="tui-text_body-m"
+            [innerHTML]="profile().about.details.languages"
+          ></div>
         </div>
       </div>
     </div>

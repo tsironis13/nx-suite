@@ -1,6 +1,14 @@
 <div class="hoverable-card relative" [style.height]="height() + 'px'">
-  @if (imageUrl()) {
-  <img ngSrc="{{ imageUrl() }}" fill class="rounded-xl" />
+  @if (image().setAsBackground) {
+  <img ngSrc="{{ image().url }}" fill class="rounded-xl" />
+  } @else {
+  <div
+    tuiAppearance="floating"
+    tuiCardLarge
+    class="h-full flex !items-center justify-center"
+  >
+    <img ngSrc="{{ image().url }}" height="120" width="120" class="!mt-0" />
+  </div>
   } @if (details()) {
   <div
     class="details-content absolute w-10 h-10 right-7 -top-2.5 bg-white duration-600 rounded-full invisible cursor-pointer opacity-0"

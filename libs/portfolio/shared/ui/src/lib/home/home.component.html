@@ -25,10 +25,7 @@
     </div>
   </div>
   <div class="container grid grid-cols-1 lg:hidden text-center details">
-    <h1 class="tui-text_h1 title">Ioannis Tsironis</h1>
-    <div class="subtitle">
-      Senior Web Engineer and kalase kalase test new line
-    </div>
+    <ng-container [ngTemplateOutlet]="details"></ng-container>
     <div style="left: -70px; top: 0; position: absolute">
       <img
         ngSrc="./assets/images/slider-yellow-shadow.png"
@@ -53,10 +50,7 @@
   </div>
   <div class="container flex-row items-center hidden lg:flex details">
     <div class="basis-1/2 relative">
-      <h1 class="tui-text_h1 title">Ioannis Tsironis</h1>
-      <div class="subtitle">
-        Senior Web Engineer and kalase kalase test new line
-      </div>
+      <ng-container [ngTemplateOutlet]="details"></ng-container>
       <div style="left: -70px; top: 0; position: absolute">
         <img
           ngSrc="./assets/images/slider-yellow-shadow.png"
@@ -84,3 +78,8 @@
     <div class="basis-1/4"></div>
   </div>
 </div>
+
+<ng-template #details>
+  <h1 class="tui-text_h1 title">{{ profile().title }}</h1>
+  <div class="subtitle" [innerHTML]="profile().subtitle"></div>
+</ng-template>

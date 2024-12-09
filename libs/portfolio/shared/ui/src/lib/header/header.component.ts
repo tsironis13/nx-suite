@@ -9,7 +9,10 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HeaderNavigationStore } from '@nx-suite/portfolio/shared/domain';
+import {
+  HeaderNavigationStore,
+  socialNetworks,
+} from '@nx-suite/portfolio/shared/domain';
 import { NxSuiteUiSocialNetworksComponent } from '@nx-suite/shared/ui';
 import { SocialNetworkItem } from '@nx-suite/shared/util';
 import { TuiButton, TuiDataList, TuiLink } from '@taiga-ui/core';
@@ -38,27 +41,9 @@ import { TuiHeader, TuiNavigation } from '@taiga-ui/layout';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioHeaderComponent {
+  protected readonly open = signal(false);
   protected readonly socialNetworkItems: WritableSignal<SocialNetworkItem[]> =
-    signal([
-      {
-        link: 'https://www.linkedin.com/',
-        background: '#0077b5',
-        icon: '@tui.linkedin',
-      },
-      {
-        link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
-        background: '#1877f2',
-        icon: '@tui.facebook',
-      },
-      {
-        link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
-        background: '#e7700d',
-        customImage: {
-          url: './assets/images/stackoverflow-icon3.png',
-          alt: 'stackoverflow',
-        },
-      },
-    ]);
+    signal(socialNetworks);
 
   protected readonly headerNavigationService = inject(HeaderNavigationStore);
 
@@ -71,5 +56,11 @@ export class PortfolioHeaderComponent {
     afterNextRender(() => {
       this.headerNavigationService.enableStickyHeader();
     });
+  }
+
+  public closeSidebar(): void {
+    if (this.open()) {
+      this.open.set(false);
+    }
   }
 }
