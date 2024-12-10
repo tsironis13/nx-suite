@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { eduction } from '@nx-suite/portfolio/shared/domain';
 import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
@@ -10,4 +11,6 @@ import { TuiIcon } from '@taiga-ui/core';
   imports: [TuiIcon, NgOptimizedImage],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PortfolioEducationComponent {}
+export class PortfolioEducationComponent {
+  protected readonly education = signal(eduction);
+}

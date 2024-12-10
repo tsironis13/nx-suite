@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { awards } from '@nx-suite/portfolio/shared/domain';
 import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
@@ -10,4 +11,6 @@ import { TuiIcon } from '@taiga-ui/core';
   styleUrl: './awards.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PortfolioAwardsComponent {}
+export class PortfolioAwardsComponent {
+  protected readonly awards = signal(awards);
+}

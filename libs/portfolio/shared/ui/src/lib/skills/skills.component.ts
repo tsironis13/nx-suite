@@ -5,6 +5,7 @@ import {
   computed,
   signal,
 } from '@angular/core';
+import { skills } from '@nx-suite/portfolio/shared/domain';
 import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
@@ -16,15 +17,7 @@ import { TuiIcon } from '@taiga-ui/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioSkillsComponent {
-  protected readonly skills = signal([
-    'Problem Solving',
-    'Time Management',
-    'Leadership',
-    'Critical Thinking',
-    'Teamwork',
-    'Easily Adaptable',
-    'Creative Decision Making',
-  ]);
+  protected readonly skills = signal(skills);
 
   protected readonly mediumBreakpointMiddleElements = computed(() =>
     this.getMediumBreakpointElements('middle')

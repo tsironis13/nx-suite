@@ -1,5 +1,9 @@
+@defer (on viewport) {
 <portfolio-header></portfolio-header>
 <portfolio-home id="home"></portfolio-home>
+} @placeholder {
+<div>Loader</div>
+} @defer (on viewport) {
 <portfolio-about id="about"></portfolio-about>
 <portfolio-about-banner></portfolio-about-banner>
 <portfolio-projects id="projects"></portfolio-projects>
@@ -9,6 +13,9 @@
 <portfolio-skills></portfolio-skills>
 <portfolio-tech-stack id="techStack"></portfolio-tech-stack>
 <portfolio-footer></portfolio-footer>
+} @placeholder {
+<div>Loading</div>
+}
 
 <nx-suite-ui-scroll-top
   [isVisible]="isScrollTopVisible()"

@@ -20,6 +20,7 @@
   <div class="tui-text_h5" style="margin-bottom: 30px">My Education</div>
   <div class="grid gap-4 grid-cols-1 lg:grid-cols-2">
     <div>
+      @for (item of education(); track $index) {
       <div class="flex gap-7" style="margin-bottom: 32px">
         <div
           class="flex-none flex items-center"
@@ -38,49 +39,17 @@
           />
         </div>
         <div class="grow">
-          <div class="tui-text_h6">BA Information Technology</div>
+          <div class="tui-text_h6">{{ item.department }}</div>
           <div style="margin: 5px 0">
-            <span class="tui-text_h6" style="font-size: 17px"
-              >ATEI Thessaloniki, Thessaloniki - Greece</span
+            <span class="tui-text_h6" style="font-size: 17px">{{
+              item.location
+            }}</span
             ><br />
-            ( 2008 - 2016 )
-          </div>
-          <!-- <div class="tui-text_body-m">
-            Ludantium totam rem aperia meaque ipsa quae ab illo inven tore
-            veritatis et quasi architecto beatae vitae.
-          </div> -->
-        </div>
-      </div>
-      <div class="flex gap-7" style="margin-bottom: 32px">
-        <div
-          class="flex-none flex items-center"
-          style="
-            background: #7ad3ab;
-            width: 70px;
-            height: 70px;
-            border-radius: 6px;
-            justify-content: center;
-          "
-        >
-          <tui-icon
-            icon="@tui.graduation-cap"
-            [style.color]="'var(--tui-text-primary-on-accent-1)'"
-            style="font-size: 30px"
-          />
-        </div>
-        <div class="grow">
-          <div class="tui-text_h6">
-            Caltech Post Graduate Program In AI And Machine Learning
-          </div>
-          <div style="margin: 5px 0">
-            <span class="tui-text_h6" style="font-size: 17px"
-              >Caltech (Center for Technology & Management Education),
-              Online</span
-            ><br />
-            ( July 2023 - July 2024 )
+            <span>{{ item.period }}</span>
           </div>
         </div>
       </div>
+      }
     </div>
     <div class="flex mt-[70px] lg:mt-0 md:justify-center">
       <div
