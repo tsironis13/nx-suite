@@ -2,8 +2,8 @@ import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Signal,
   signal,
-  WritableSignal,
 } from '@angular/core';
 import { profile, socialNetworks } from '@nx-suite/portfolio/shared/domain';
 import { NxSuiteUiSocialNetworksComponent } from '@nx-suite/shared/ui';
@@ -22,7 +22,7 @@ import { SocialNetworkItem } from '@nx-suite/shared/util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioHomeComponent {
-  protected readonly profile = signal(profile);
-  protected readonly socialNetworkItems: WritableSignal<SocialNetworkItem[]> =
-    signal(socialNetworks);
+  protected readonly profile = signal(profile).asReadonly();
+  protected readonly socialNetworkItems: Signal<SocialNetworkItem[]> =
+    signal(socialNetworks).asReadonly();
 }

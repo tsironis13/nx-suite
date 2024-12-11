@@ -17,7 +17,7 @@ import { TuiIcon } from '@taiga-ui/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioSkillsComponent {
-  protected readonly skills = signal(skills);
+  protected readonly skills = signal(skills).asReadonly();
 
   protected readonly mediumBreakpointMiddleElements = computed(() =>
     this.getMediumBreakpointElements('middle')

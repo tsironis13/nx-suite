@@ -8,8 +8,8 @@ export const socialNetworks: SocialNetworkItem[] = [
   },
   {
     link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
-    background: '#1877f2',
-    icon: '@tui.facebook',
+    background: '#000',
+    icon: '@tui.github',
   },
   {
     link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
@@ -18,5 +18,10 @@ export const socialNetworks: SocialNetworkItem[] = [
       url: './assets/images/stackoverflow-icon3.png',
       alt: 'stackoverflow',
     },
+  },
+  {
+    link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
+    background: '#1877f2',
+    icon: '@tui.facebook',
   },
 ];

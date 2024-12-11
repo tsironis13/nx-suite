@@ -12,5 +12,5 @@ import { TuiIcon } from '@taiga-ui/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioAwardsComponent {
-  protected readonly awards = signal(awards);
+  protected readonly awards = signal(awards).asReadonly();
 }

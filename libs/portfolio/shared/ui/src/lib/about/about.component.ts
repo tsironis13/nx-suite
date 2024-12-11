@@ -11,5 +11,5 @@ import { profile } from '@nx-suite/portfolio/shared/domain';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioAboutComponent {
-  protected readonly profile = signal(profile);
+  protected readonly profile = signal(profile).asReadonly();
 }

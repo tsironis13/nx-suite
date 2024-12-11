@@ -12,5 +12,5 @@ import { TuiIcon } from '@taiga-ui/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioExperienceComponent {
-  protected readonly experience = signal(experience);
+  protected readonly experience = signal(experience).asReadonly();
 }

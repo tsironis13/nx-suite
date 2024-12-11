@@ -13,5 +13,5 @@ import { TuiCardLarge, TuiCell } from '@taiga-ui/layout';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioTechStackComponent {
-  protected readonly stack = signal(stack);
+  protected readonly stack = signal(stack).asReadonly();
 }

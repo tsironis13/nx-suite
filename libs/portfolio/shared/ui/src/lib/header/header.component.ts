@@ -5,8 +5,8 @@ import {
   Component,
   HostListener,
   inject,
+  Signal,
   signal,
-  WritableSignal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -42,8 +42,8 @@ import { TuiHeader, TuiNavigation } from '@taiga-ui/layout';
 })
 export class PortfolioHeaderComponent {
   protected readonly open = signal(false);
-  protected readonly socialNetworkItems: WritableSignal<SocialNetworkItem[]> =
-    signal(socialNetworks);
+  protected readonly socialNetworkItems: Signal<SocialNetworkItem[]> =
+    signal(socialNetworks).asReadonly();
 
   protected readonly headerNavigationService = inject(HeaderNavigationStore);
 
