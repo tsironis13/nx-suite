@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRouter([], withInMemoryScrolling({ anchorScrolling: 'enabled' })),
     provideTrpcClient(),
-    provideImgixLoader('https://itsironis-portfolio.vercel.app/assets/images'),
+    provideImgixLoader('https://itsironis-portfolio2.imgix.net'),
     provideAnimations(),
     NG_EVENT_PLUGINS,
   ],
