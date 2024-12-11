@@ -73,36 +73,123 @@ export class ShellComponent {
 
   @HostListener('document:scroll', ['$event'])
   public onViewportScroll() {
-    this.headerNavigationService.updateActiveItemOnPageScroll(scrollY);
     this.toggleScrollTop();
+    this.updateComponentsOffsetTop();
+    this.headerNavigationService.updateActiveItemOnPageScroll(scrollY);
   }
 
   private updateComponentsOffsetTop(): void {
-    this.headerNavigationService.updateComponentOffsetTop('home', [
-      this.home()?.nativeElement.offsetTop,
-      this.home()?.nativeElement.offsetHeight,
-    ]);
-    this.headerNavigationService.updateComponentOffsetTop('about', [
-      this.about()?.nativeElement.offsetTop,
-      this.about()?.nativeElement.offsetHeight,
-    ]);
-    this.headerNavigationService.updateComponentOffsetTop('projects', [
-      this.projects()?.nativeElement.offsetTop,
-      this.projects()?.nativeElement.offsetHeight,
-    ]);
-    this.headerNavigationService.updateComponentOffsetTop('experience', [
-      this.experience()?.nativeElement.offsetTop,
-      this.experience()?.nativeElement.offsetHeight,
-    ]);
-    this.headerNavigationService.updateComponentOffsetTop('techStack', [
-      this.techStack()?.nativeElement.offsetTop,
-      this.techStack()?.nativeElement.offsetHeight,
-    ]);
+    this.updateHomeOffsetTop();
+    this.updateAboutOffsetTop();
+    this.updateProjectsOffsetTop();
+    this.updateExperienceOffsetTop();
+    this.updateTechStackOffsetTop();
 
     this.headerNavigationService.updateActiveItemOnPageScroll(scrollY);
   }
 
   private toggleScrollTop(): void {
     this.isScrollTopVisible.set(scrollY > 500);
+  }
+
+  private updateHomeOffsetTop(): void {
+    const homeBoundaries =
+      this.headerNavigationService.scrollingState()
+        .componentsOffsetTopOffsetHeightBoundaries['home'];
+
+    const homeOffsetTop = this.home()?.nativeElement.offsetTop;
+    const homeOffsetHeight = this.home()?.nativeElement.offsetHeight;
+
+    if (
+      homeBoundaries &&
+      (homeOffsetTop !== homeBoundaries[0] ||
+        homeOffsetHeight !== homeBoundaries[1])
+    ) {
+      this.headerNavigationService.updateComponentOffsetTop('home', [
+        homeOffsetTop,
+        homeOffsetHeight,
+      ]);
+    }
+  }
+
+  private updateAboutOffsetTop(): void {
+    const aboutBoundaries =
+      this.headerNavigationService.scrollingState()
+        .componentsOffsetTopOffsetHeightBoundaries['about'];
+
+    const aboutOffsetTop = this.about()?.nativeElement.offsetTop;
+    const aboutOffsetHeight = this.about()?.nativeElement.offsetHeight;
+
+    if (
+      aboutBoundaries &&
+      (aboutOffsetTop !== aboutBoundaries[0] ||
+        aboutOffsetHeight !== aboutBoundaries[1])
+    ) {
+      this.headerNavigationService.updateComponentOffsetTop('about', [
+        aboutOffsetTop,
+        aboutOffsetHeight,
+      ]);
+    }
+  }
+
+  private updateProjectsOffsetTop(): void {
+    const projectsBoundaries =
+      this.headerNavigationService.scrollingState()
+        .componentsOffsetTopOffsetHeightBoundaries['projects'];
+
+    const projectsOffsetTop = this.projects()?.nativeElement.offsetTop;
+    const projectsOffsetHeight = this.projects()?.nativeElement.offsetHeight;
+
+    if (
+      projectsBoundaries &&
+      (projectsOffsetTop !== projectsBoundaries[0] ||
+        projectsOffsetHeight !== projectsBoundaries[1])
+    ) {
+      this.headerNavigationService.updateComponentOffsetTop('projects', [
+        projectsOffsetTop,
+        projectsOffsetHeight,
+      ]);
+    }
+  }
+
+  private updateExperienceOffsetTop(): void {
+    const experienceBoundaries =
+      this.headerNavigationService.scrollingState()
+        .componentsOffsetTopOffsetHeightBoundaries['experience'];
+
+    const experienceOffsetTop = this.experience()?.nativeElement.offsetTop;
+    const experienceOffsetHeight =
+      this.experience()?.nativeElement.offsetHeight;
+
+    if (
+      experienceBoundaries &&
+      (experienceOffsetTop !== experienceBoundaries[0] ||
+        experienceOffsetHeight !== experienceBoundaries[1])
+    ) {
+      this.headerNavigationService.updateComponentOffsetTop('experience', [
+        experienceOffsetTop,
+        experienceOffsetHeight,
+      ]);
+    }
+  }
+
+  private updateTechStackOffsetTop(): void {
+    const techStackBoundaries =
+      this.headerNavigationService.scrollingState()
+        .componentsOffsetTopOffsetHeightBoundaries['techStack'];
+
+    const techStackOffsetTop = this.techStack()?.nativeElement.offsetTop;
+    const techStackOffsetHeight = this.techStack()?.nativeElement.offsetHeight;
+
+    if (
+      techStackBoundaries &&
+      (techStackOffsetTop !== techStackBoundaries[0] ||
+        techStackOffsetHeight !== techStackBoundaries[1])
+    ) {
+      this.headerNavigationService.updateComponentOffsetTop('techStack', [
+        techStackOffsetTop,
+        techStackOffsetHeight,
+      ]);
+    }
   }
 }
