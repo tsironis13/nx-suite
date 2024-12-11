@@ -13,6 +13,7 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 
+import { provideImgixLoader } from '@angular/common';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRouter([], withInMemoryScrolling({ anchorScrolling: 'enabled' })),
     provideTrpcClient(),
+    provideImgixLoader('https://itsironis-portfolio.vercel.app/assets/images'),
     provideAnimations(),
     NG_EVENT_PLUGINS,
   ],

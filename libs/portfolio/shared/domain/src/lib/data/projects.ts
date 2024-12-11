@@ -2,7 +2,7 @@ export const projects = [
   {
     tabIndex: 1,
     image: {
-      url: './assets/images/angular.png',
+      url: 'angular.png',
       setAsBackground: false,
     },
     backgroundHoverColor: '7ad3ab',
@@ -15,7 +15,7 @@ export const projects = [
   {
     tabIndex: 1,
     image: {
-      url: './assets/images/angular.png',
+      url: 'angular.png',
       setAsBackground: false,
     },
     backgroundHoverColor: '7ad3ab',
@@ -30,7 +30,7 @@ export const projects = [
   {
     tabIndex: 1,
     image: {
-      url: './assets/images/angular.png',
+      url: 'angular.png',
       setAsBackground: false,
     },
     backgroundHoverColor: '7ad3ab',
@@ -43,7 +43,7 @@ export const projects = [
   {
     tabIndex: 2,
     image: {
-      url: './assets/images/angular-challenges.webp',
+      url: 'angular-challenges.webp',
       setAsBackground: false,
     },
     backgroundHoverColor: '7ad3ab',
@@ -56,7 +56,7 @@ export const projects = [
   {
     tabIndex: 2,
     image: {
-      url: './assets/images/spartan.png',
+      url: 'spartan.png',
       setAsBackground: false,
     },
     backgroundHoverColor: '7ad3ab',
@@ -69,7 +69,7 @@ export const projects = [
   {
     tabIndex: 2,
     image: {
-      url: './assets/images/angular-space.png',
+      url: 'angular-space.png',
       setAsBackground: false,
     },
     backgroundHoverColor: '7ad3ab',
