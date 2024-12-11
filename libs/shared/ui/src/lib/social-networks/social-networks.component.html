@@ -13,6 +13,7 @@
       [style.--tui-icon-size.rem]="1.5"
       class="w-12 h-12 flex justify-center items-center !text-white rounded-full before:!me-0 icon"
       [style.background]="item.background"
+      aria-label="social-network-link"
     >
       @if (item.customImage) {
       <img src="{{ item.customImage.url }}" alt="{{ item.customImage.alt }}" />
