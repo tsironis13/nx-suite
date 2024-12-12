@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRouter([], withInMemoryScrolling({ anchorScrolling: 'enabled' })),
     provideTrpcClient(),
-    provideImgixLoader('https://itsironis-portfolio2.imgix.net'),
+    provideImgixLoader('https://itsironis-portfolio.imgix.net'),
     provideAnimations(),
     NG_EVENT_PLUGINS,
   ],

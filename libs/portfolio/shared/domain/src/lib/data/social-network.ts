@@ -2,17 +2,17 @@ import { SocialNetworkItem } from '@nx-suite/shared/util';
 
 export const socialNetworks: SocialNetworkItem[] = [
   {
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/in/giannis-tsironis/',
     background: '#0077b5',
     icon: '@tui.linkedin',
   },
   {
-    link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
+    link: 'https://github.com/tsironis13',
     background: '#000',
     icon: '@tui.github',
   },
   {
-    link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
+    link: 'https://stackoverflow.com/users/3884310/tsiro',
     background: '#e7700d',
     customImage: {
       url: 'stackoverflow-icon3.png',
@@ -20,7 +20,7 @@ export const socialNetworks: SocialNetworkItem[] = [
     },
   },
   {
-    link: 'https://stackoverflow.com/questions/40336155/binding-appending-to-href',
+    link: 'https://www.facebook.com/giannis.tsirob',
     background: '#1877f2',
     icon: '@tui.facebook',
   },
