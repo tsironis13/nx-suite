@@ -7,7 +7,13 @@
     tuiCardLarge
     class="h-full flex !items-center justify-center"
   >
-    <img ngSrc="{{ image().url }}" height="120" width="120" class="!mt-0" />
+    <img
+      ngSrc="{{ image().url }}"
+      height="120"
+      width="120"
+      class="!mt-0"
+      alt="hoverable-card-img"
+    />
   </div>
   } @if (details()) {
   <div
