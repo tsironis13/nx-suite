@@ -9,7 +9,7 @@ export const projects = [
     height: 390,
     title: 'Nx Suite',
     subtitle:
-      'Collection of applications and libraries built insde an Nx Monorepository adhering to DDD architecture principles using Angular Framework. In addition, this repo contains a resusable component library on top of TaigaUI that can be shared accross all applications.',
+      'Collection of applications and libraries built inside an Nx Monorepository adhering to DDD architecture principles using Angular Framework. In addition, this repo contains a resusable component library on top of TaigaUI that can be shared across all applications.',
     details: { link: 'https://github.com/tsironis13/nx-suite' },
   },
   {

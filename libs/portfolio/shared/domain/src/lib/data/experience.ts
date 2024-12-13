@@ -44,7 +44,7 @@ export const experience = [
     stuff: [
       'Designing and developing medium scale websites using html, javascript, css.',
       'Developing large scale web services using AngularJs and Perl.',
-      'Problem solved with various stakeholders.',
+      'Problem solving with various stakeholders.',
     ],
   },
 ];

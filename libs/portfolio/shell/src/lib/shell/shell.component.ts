@@ -120,16 +120,18 @@ export class ShellComponent {
     const aboutOffsetTop = this.about()?.nativeElement.offsetTop;
     const aboutOffsetHeight = this.about()?.nativeElement.offsetHeight;
 
-    if (
-      aboutBoundaries &&
-      (aboutOffsetTop !== aboutBoundaries[0] ||
-        aboutOffsetHeight !== aboutBoundaries[1])
-    ) {
-      this.headerNavigationService.updateComponentOffsetTop('about', [
-        aboutOffsetTop,
-        aboutOffsetHeight,
-      ]);
+    if (!aboutOffsetTop || !aboutOffsetHeight) {
+      return;
     }
+
+    if (aboutBoundaries && aboutBoundaries[0] !== 0) {
+      return;
+    }
+
+    this.headerNavigationService.updateComponentOffsetTop('about', [
+      aboutOffsetTop,
+      aboutOffsetHeight,
+    ]);
   }
 
   private updateProjectsOffsetTop(): void {
@@ -140,16 +142,18 @@ export class ShellComponent {
     const projectsOffsetTop = this.projects()?.nativeElement.offsetTop;
     const projectsOffsetHeight = this.projects()?.nativeElement.offsetHeight;
 
-    if (
-      projectsBoundaries &&
-      (projectsOffsetTop !== projectsBoundaries[0] ||
-        projectsOffsetHeight !== projectsBoundaries[1])
-    ) {
-      this.headerNavigationService.updateComponentOffsetTop('projects', [
-        projectsOffsetTop,
-        projectsOffsetHeight,
-      ]);
+    if (!projectsOffsetTop || !projectsOffsetHeight) {
+      return;
     }
+
+    if (projectsBoundaries && projectsBoundaries[0] !== 0) {
+      return;
+    }
+
+    this.headerNavigationService.updateComponentOffsetTop('projects', [
+      projectsOffsetTop,
+      projectsOffsetHeight,
+    ]);
   }
 
   private updateExperienceOffsetTop(): void {
@@ -161,16 +165,18 @@ export class ShellComponent {
     const experienceOffsetHeight =
       this.experience()?.nativeElement.offsetHeight;
 
-    if (
-      experienceBoundaries &&
-      (experienceOffsetTop !== experienceBoundaries[0] ||
-        experienceOffsetHeight !== experienceBoundaries[1])
-    ) {
-      this.headerNavigationService.updateComponentOffsetTop('experience', [
-        experienceOffsetTop,
-        experienceOffsetHeight,
-      ]);
+    if (!experienceOffsetTop || !experienceOffsetHeight) {
+      return;
     }
+
+    if (experienceBoundaries && experienceBoundaries[0] !== 0) {
+      return;
+    }
+
+    this.headerNavigationService.updateComponentOffsetTop('experience', [
+      experienceOffsetTop,
+      experienceOffsetHeight,
+    ]);
   }
 
   private updateTechStackOffsetTop(): void {
@@ -181,15 +187,17 @@ export class ShellComponent {
     const techStackOffsetTop = this.techStack()?.nativeElement.offsetTop;
     const techStackOffsetHeight = this.techStack()?.nativeElement.offsetHeight;
 
-    if (
-      techStackBoundaries &&
-      (techStackOffsetTop !== techStackBoundaries[0] ||
-        techStackOffsetHeight !== techStackBoundaries[1])
-    ) {
-      this.headerNavigationService.updateComponentOffsetTop('techStack', [
-        techStackOffsetTop,
-        techStackOffsetHeight,
-      ]);
+    if (!techStackOffsetTop || !techStackOffsetHeight) {
+      return;
     }
+
+    if (techStackBoundaries && techStackBoundaries[0] !== 0) {
+      return;
+    }
+
+    this.headerNavigationService.updateComponentOffsetTop('techStack', [
+      techStackOffsetTop,
+      techStackOffsetHeight,
+    ]);
   }
 }
