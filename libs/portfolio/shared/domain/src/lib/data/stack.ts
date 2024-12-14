@@ -41,7 +41,7 @@ export const stack = [
   },
   {
     title: 'Testing',
-    items: ['Jest', 'Jasmine', 'Karma', 'Angular Testing Library'],
+    items: ['Jest', 'Jasmine', 'Karma', 'Angular Testing Library', 'Storybook'],
   },
   {
     title: 'State Management Solutions',
