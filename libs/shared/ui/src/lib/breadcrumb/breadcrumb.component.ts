@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,7 +18,7 @@ interface BreadcrumbComponent<T> {
 @Component({
   selector: 'nx-suite-ui-breadcrumb',
   standalone: true,
-  imports: [NgFor, RouterLink, TuiBreadcrumbs, TuiItem, TuiLink],
+  imports: [RouterLink, TuiBreadcrumbs, TuiItem, TuiLink],
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

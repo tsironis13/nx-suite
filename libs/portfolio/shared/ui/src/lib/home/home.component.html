@@ -87,4 +87,10 @@
 <ng-template #details>
   <h1 class="tui-text_h1 title">{{ profile().title }}</h1>
   <div class="subtitle" [innerHTML]="profile().subtitle"></div>
+  <nx-suite-ui-button
+    [size]="'m'"
+    [appearance]="'primary'"
+    (onClick)="onCvDownload()"
+    >Download CV</nx-suite-ui-button
+  >
 </ng-template>

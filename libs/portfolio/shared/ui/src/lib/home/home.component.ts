@@ -6,7 +6,10 @@ import {
   signal,
 } from '@angular/core';
 import { profile, socialNetworks } from '@nx-suite/portfolio/shared/domain';
-import { NxSuiteUiSocialNetworksComponent } from '@nx-suite/shared/ui';
+import {
+  NxSuiteUiButtonComponent,
+  NxSuiteUiSocialNetworksComponent,
+} from '@nx-suite/shared/ui';
 import { SocialNetworkItem } from '@nx-suite/shared/util';
 
 @Component({
@@ -18,6 +21,7 @@ import { SocialNetworkItem } from '@nx-suite/shared/util';
     NgOptimizedImage,
     NxSuiteUiSocialNetworksComponent,
     NgTemplateOutlet,
+    NxSuiteUiButtonComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,4 +29,11 @@ export class PortfolioHomeComponent {
   protected readonly profile = signal(profile).asReadonly();
   protected readonly socialNetworkItems: Signal<SocialNetworkItem[]> =
     signal(socialNetworks).asReadonly();
+
+  protected onCvDownload(): void {
+    const link = document.createElement('a');
+    link.download = 'Ioannis-Tsironis-CV.pdf';
+    link.href = '/Ioannis-Tsironis-CV.pdf';
+    link.click();
+  }
 }

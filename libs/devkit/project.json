@@ -1,0 +1,48 @@
+{
+  "name": "devkit",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/devkit/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/devkit",
+        "main": "libs/devkit/src/index.ts",
+        "tsConfig": "libs/devkit/tsconfig.lib.json",
+        "assets": [
+          "libs/devkit/*.md",
+          {
+            "input": "./libs/devkit/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/devkit/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/devkit",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/devkit",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/devkit/jest.config.ts"
+      }
+    }
+  }
+}

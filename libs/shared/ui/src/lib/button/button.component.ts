@@ -11,7 +11,7 @@ import {
   ButtonIcon,
   ButtonSize,
 } from '@nx-suite/shared/util';
-import { TuiButton, TuiIcon } from '@taiga-ui/core';
+import { TuiButton } from '@taiga-ui/core';
 
 interface ButtonComponent {
   size: InputSignal<ButtonSize>;
@@ -23,7 +23,7 @@ interface ButtonComponent {
 @Component({
   selector: 'nx-suite-ui-button',
   standalone: true,
-  imports: [TuiButton, TuiIcon],
+  imports: [TuiButton],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

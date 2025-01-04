@@ -1,13 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HeaderNavigationStore } from '@nx-suite/domain';
 import {
   Category,
   CategoryForm,
   CategoryStore,
 } from '@nx-suite/eshop-admin/categories/domain';
+import { HeaderNavigationStore } from '@nx-suite/eshop-admin/shared/domain';
 import {
-  NxSuiteUiButtonComponent,
   NxSuiteUiInputComponent,
   NxSuiteUiLoaderComponent,
   NxSuiteUiSelectComponent,
@@ -19,7 +18,6 @@ import { FormGroupMap } from '@nx-suite/shared/util';
   imports: [
     NxSuiteUiSelectComponent,
     NxSuiteUiInputComponent,
-    NxSuiteUiButtonComponent,
     NxSuiteUiLoaderComponent,
     ReactiveFormsModule,
   ],

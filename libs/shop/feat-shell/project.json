@@ -1,0 +1,20 @@
+{
+  "name": "shop-feat-shell",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shop/feat-shell/src",
+  "prefix": "sh",
+  "projectType": "library",
+  "tags": ["scope:shop", "type:feat"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/shop/feat-shell/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

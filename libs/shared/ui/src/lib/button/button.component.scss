@@ -1,1 +1,3 @@
-
+button {
+  z-index: var(--button-overlay); //must be defined in each app's global vars
+}

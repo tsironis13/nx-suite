@@ -17,5 +17,6 @@ $below: -1;
   //z-index
   --toolbar: #{$above + $base}; //z-index: 10
   --hoverable-card-overlay: #{$above + $base + $below}; //z-index: toolbar - 1 => 9
+  --button-overlay: #{$above + $base + $below}; //z-index: toolbar - 1 => 9
   --background-below: #{$below}; //z-index: -1
 }

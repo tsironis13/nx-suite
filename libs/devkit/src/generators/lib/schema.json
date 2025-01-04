@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Lib",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the lib"
+    },
+    "type": {
+      "type": "string",
+      "description": "ui, data-access, feat, util, type, state, guard, const"
+    },
+    "scope": {
+      "type": "string",
+      "description": "The scope of the lib"
+    }
+  },
+  "required": ["name", "type", "scope"]
+}

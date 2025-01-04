@@ -22,8 +22,8 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { Entity, ToStringPipe } from '@nx-suite/shared/util';
-import { TuiContext, TuiLet, tuiPure, TuiValueChanges } from '@taiga-ui/cdk';
-import { TuiError, TuiScrollable, TuiScrollbar } from '@taiga-ui/core';
+import { TuiContext, TuiLet, tuiPure } from '@taiga-ui/cdk';
+import { TuiError, TuiScrollable } from '@taiga-ui/core';
 import { TuiFieldErrorPipe } from '@taiga-ui/kit';
 import {
   TuiSelectModule,
@@ -51,8 +51,6 @@ interface UiSelectComponent<T, K, Z> {
     TuiFieldErrorPipe,
     ReactiveFormsModule,
     TuiScrollable,
-    TuiScrollbar,
-    TuiValueChanges,
     CdkFixedSizeVirtualScroll,
     CdkVirtualForOf,
     CdkVirtualScrollViewport,

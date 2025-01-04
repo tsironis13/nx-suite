@@ -58,7 +58,9 @@
         "libs/shared/domain/trpc-server/src/index.ts"
       ],
       "@nx-suite/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"]
+      "@nx-suite/shared/util": ["libs/shared/util/src/index.ts"],
+      "@shoppie/devkit": ["libs/devkit/src/index.ts"],
+      "@shoppie/shop-feat-shell": ["libs/shop/feat-shell/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true
   },
