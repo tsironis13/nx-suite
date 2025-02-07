@@ -7,5 +7,6 @@ export const awards = [
   'NG-DE 2019 Angular Conference, Berlin',
   'Master Software Dev: Leadership, Decision-Making Skills 2023, Udemy',
   'Conscious Angular Testing, Decoded Frontend',
+  'Advanced Angular Forms, Decoded Frontend',
   'Senior Angular Developer(Level 3) Certification Exam, Certificates.dev',
 ];
